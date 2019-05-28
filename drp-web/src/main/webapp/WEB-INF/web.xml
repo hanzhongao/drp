@@ -25,19 +25,19 @@
         <servlet-class>com.yootk.common.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>scanPackages</param-name>
-            <param-value>com.yootk.mall</param-value> <!-- 如果有多个包使用“;”分割 -->
+            <param-value>com.yootk.drp</param-value> <!-- 如果有多个包使用“;”分割 -->
         </init-param>
         <init-param>
             <param-name>validationBaseName</param-name>
-            <param-value>com.yootk.mall.action.validate.Validation</param-value>
+            <param-value>com.yootk.drp.action.validate.Validation</param-value>
         </init-param>
         <init-param>
             <param-name>errorPageBaseName</param-name>
-            <param-value>com.yootk.mall.action.validate.ErrorPage</param-value>
+            <param-value>com.yootk.drp.action.validate.ErrorPage</param-value>
         </init-param>
         <init-param>
             <param-name>messageBaseName</param-name>
-            <param-value>com.yootk.mall.action.resource.Message</param-value>
+            <param-value>com.yootk.drp.action.resource.Message</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
