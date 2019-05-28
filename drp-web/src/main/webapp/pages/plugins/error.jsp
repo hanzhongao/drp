@@ -131,12 +131,5 @@
                 51070302110363号</p></a>
     </div>
 </DIV>
-<script>var _hmt = _hmt || [];
-!function () {
-    var e = document.createElement("script");
-    e.src = "https://hm.baidu.com/hm.js?46d556462595ed05e05f009cdafff31a";
-    var t = document.getElementsByTagName("script")[0];
-    t.parentNode.insertBefore(e, t)
-}()</script>
 </BODY>
 </HTML>
