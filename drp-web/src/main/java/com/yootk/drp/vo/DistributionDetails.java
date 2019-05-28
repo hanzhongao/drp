@@ -2,6 +2,10 @@ package com.yootk.drp.vo;
 
 import java.io.Serializable;
 
+/**
+ * 出库申请详情表
+ * @author yaoxinlan
+ */
 public class DistributionDetails implements Serializable {
     private Integer dsdid;
     private Integer gid;

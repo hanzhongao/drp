@@ -2,6 +2,10 @@ package com.yootk.drp.vo;
 
 import java.io.Serializable;
 
+/**
+ * 联系地址表
+ * @author yaoxinlan
+ */
 public class Address implements Serializable {
     private Integer adid;
     private String mid;
