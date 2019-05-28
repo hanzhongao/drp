@@ -16,7 +16,7 @@ import com.yootk.drp.vo.Member;
 public class MemberActionFront extends AbstractAction {
     public static final String ACTION_TITLE = "用户";
     @Autowired
-    private IMemberServiceFront memberService;
+    private IMemberServiceFront memberServiceFront;
 
     /**
      * 登录前的页面跳转处理
@@ -52,6 +52,7 @@ public class MemberActionFront extends AbstractAction {
     @RequestMapping("/code_check")
     public void check(String code) {
         String rand = (String) ServletObject.getRequest().getSession().getAttribute("rand");
+        System.out.println("**************************");
         if (rand == null || "".equals(rand)) {
             super.print(false);
         } else {
@@ -70,7 +71,7 @@ public class MemberActionFront extends AbstractAction {
     public ModuleAndView login(Member vo, String rememberme) throws Exception {
         ModuleAndView mav = new ModuleAndView(super.getPage("login.action"));
         vo.setPassword(EncryptUtil.encode(vo.getPassword()));
-        if (memberService.login(vo)) {
+        if (memberServiceFront.login(vo)) {
             ServletObject.getRequest().getSession().setAttribute("mid", vo.getMid());
             mav.setView(super.getForwardPage());
             mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, super.getIndexPage());
