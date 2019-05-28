@@ -48,7 +48,7 @@
                                                placeholder="请输入登录密码" value="hello">
                                     </div>
                                     <!-- 定义表单错误提示显示元素 -->
-                                    <div class="col-md-4" id="passwordMsg">${msg}
+                                    <div class="col-md-4 text-danger"  id="passwordMsg">${msg}
                                     </div>
                                 </div>
                                 <div class="form-group" id="codeDiv">
