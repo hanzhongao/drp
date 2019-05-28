@@ -7,6 +7,7 @@ import java.util.Date;
  * 雇员信息表
  */
 public class Member implements Serializable {
+    private String  mid      ;
     private String  lid      ;
     private Long    did      ;
     private String  name     ;
@@ -25,7 +26,8 @@ public class Member implements Serializable {
     public Member() {
     }
 
-    public Member(String lid, Long did, String name, Double sal, String phone, String password, String photo, String note, Date regdate, String inmid, Integer locked, Integer type, String email, Long cuid) {
+    public Member(String mid, String lid, Long did, String name, Double sal, String phone, String password, String photo, String note, Date regdate, String inmid, Integer locked, Integer type, String email, Long cuid) {
+        this.mid = mid;
         this.lid = lid;
         this.did = did;
         this.name = name;
@@ -40,6 +42,14 @@ public class Member implements Serializable {
         this.type = type;
         this.email = email;
         this.cuid = cuid;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
     }
 
     public String getLid() {
@@ -157,7 +167,8 @@ public class Member implements Serializable {
     @Override
     public String toString() {
         return "Member{" +
-                "lid='" + lid + '\'' +
+                "mid='" + mid + '\'' +
+                ", lid='" + lid + '\'' +
                 ", did=" + did +
                 ", name='" + name + '\'' +
                 ", sal=" + sal +
