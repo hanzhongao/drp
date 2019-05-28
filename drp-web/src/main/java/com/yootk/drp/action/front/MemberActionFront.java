@@ -52,7 +52,6 @@ public class MemberActionFront extends AbstractAction {
     @RequestMapping("/code_check")
     public void check(String code) {
         String rand = (String) ServletObject.getRequest().getSession().getAttribute("rand");
-        System.out.println("**************************");
         if (rand == null || "".equals(rand)) {
             super.print(false);
         } else {
@@ -75,7 +74,10 @@ public class MemberActionFront extends AbstractAction {
             ServletObject.getRequest().getSession().setAttribute("mid", vo.getMid());
             mav.setView(super.getForwardPage());
             mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, super.getIndexPage());
+            System.out.println("###" + AbstractAction.PATH_ATTRIBUTE_NAME + " ===  " + super.getIndexPage());
             mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, ResourceUtil.getMessage("login.success", ACTION_TITLE));
+            System.out.println("###" + AbstractAction.MSG_ATTRIBUTE_NAME + " ===  " + ResourceUtil.getMessage("login.success", ACTION_TITLE));
+
             if (rememberme != null && "true".equals(rememberme)) {
                 // 将用户信息保存在Cookie之中，方便用户下一次免登录操作
                 CookieUtil.set("info", vo.getMid() + ":" + vo.getPassword(), ServletObject.getResponse());

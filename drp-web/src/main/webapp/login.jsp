@@ -1,14 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <jsp:include page="/pages/plugins/basepath.jsp"/>
     <script type="text/javascript" src="js/mall_index.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 </head>
 <%!
     public static final String LOGIN_URL = "/member_login.action";
-
 %>
-<script type="text/javascript" src="js/login.js"></script>
 <body class="back">
 <div class="container contentback">
     <div id="headDiv" class="row">
@@ -48,7 +48,8 @@
                                                placeholder="请输入登录密码" value="hello">
                                     </div>
                                     <!-- 定义表单错误提示显示元素 -->
-                                    <div class="col-md-4" id="passwordMsg"></div>
+                                    <div class="col-md-4" id="passwordMsg">${msg}
+                                    </div>
                                 </div>
                                 <div class="form-group" id="codeDiv">
                                     <!-- 定义表单提示文字 -->

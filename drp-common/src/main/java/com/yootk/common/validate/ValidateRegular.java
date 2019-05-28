@@ -71,8 +71,6 @@ public enum ValidateRegular {
             if (ValidateRegular.STRING.check(value)) {  // 数据不为空
                 String rand = (String) ServletObject.getSession().getAttribute("rand");
                 if (ValidateRegular.STRING.check(value)) {
-                    System.out.println("页面输入的验证码" + rand);
-                    System.out.println("生成的验证码" + value[0]);
                     return rand.equalsIgnoreCase(value[0]);
                 }
             }

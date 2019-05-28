@@ -16,21 +16,21 @@ import java.io.IOException;
 import java.util.Map;
 
 public class DispatcherServlet extends HttpServlet {
-    private String errorPage404 = null ;
-    private String errorPage500 = null ;
-    private String validationBaseName = null ; // 保存验证规则的文件路径
-    private String errorPageBaseName = null ; // 保存验证规则的文件路径
-    private String messageBaseName = null ; // 保存验证规则的文件路径
+    private String errorPage404 = null;
+    private String errorPage500 = null;
+    private String validationBaseName = null; // 保存验证规则的文件路径
+    private String errorPageBaseName = null; // 保存验证规则的文件路径
+    private String messageBaseName = null; // 保存验证规则的文件路径
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        String scanPackages = config.getInitParameter("scanPackages") ; // 定义扫描包
-        ScannerPackageUtil.scannerHandle(this.getClass(),scanPackages);
-        this.errorPage404 = config.getInitParameter("404") ;
-        this.errorPage500 = config.getInitParameter("500") ;
-        this.validationBaseName = config.getInitParameter("validationBaseName") ;
-        this.messageBaseName = config.getInitParameter("messageBaseName") ;
-        this.errorPageBaseName = config.getInitParameter("errorPageBaseName") ;
+        String scanPackages = config.getInitParameter("scanPackages"); // 定义扫描包
+        ScannerPackageUtil.scannerHandle(this.getClass(), scanPackages);
+        this.errorPage404 = config.getInitParameter("404");
+        this.errorPage500 = config.getInitParameter("500");
+        this.validationBaseName = config.getInitParameter("validationBaseName");
+        this.messageBaseName = config.getInitParameter("messageBaseName");
+        this.errorPageBaseName = config.getInitParameter("errorPageBaseName");
         if (this.messageBaseName != null) {
             ResourceUtil.setMessageBaseName(this.messageBaseName);
         }
@@ -38,11 +38,13 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String dispatcherPath = null ;    // 服务器端跳转路径
-        String path = request.getServletPath().substring(0,request.getServletPath().lastIndexOf(".action")) ;
-        path = path.replace(request.getContextPath(), "") ;
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String dispatcherPath = null;    // 服务器端跳转路径
+        String path = request.getServletPath().substring(0, request.getServletPath().lastIndexOf(".action"));
+        path = path.replace(request.getContextPath(), "");
         if (!ScannerPackageUtil.getActionMap().containsKey(path)) { // 现在要查询的路径不存在
-            dispatcherPath = this.errorPage404 ;
+            dispatcherPath = this.errorPage404;
         } else {
             // 获取的ControllerRequestMapping对象实例，包含有ActionObject以及Method反射对象
             ControllerRequestMapping mapping = ScannerPackageUtil.getActionMap().get(path);
@@ -52,23 +54,27 @@ public class DispatcherServlet extends HttpServlet {
 
                 // Action实例化之后才可以实现最终方法的调用
                 Object actionObject = mapping.getActionClazz().getDeclaredConstructor().newInstance();
-                ParameterUtil pu = null ; // 定义参数的接收对象
-                String uploadPath = ActionUtil.getTemp(actionObject) ; // 获取上传路径
+                ParameterUtil pu = null; // 定义参数的接收对象
+                String uploadPath = ActionUtil.getTemp(actionObject); // 获取上传路径
                 if (uploadPath == null) {
-                    pu = new ParameterUtil(request) ; // 默认构造方法实例化
+                    pu = new ParameterUtil(request); // 默认构造方法实例化
                 } else {
-                    pu = new ParameterUtil(request,uploadPath) ; // 设置上传目录
+                    pu = new ParameterUtil(request, uploadPath); // 设置上传目录
                 }
                 ServletObject.setParameterUtil(pu);
-                Map<String,String> errors = null ; // 错误信息
+                Map<String, String> errors = null; // 错误信息
                 if (this.validationBaseName == null || "".equals(this.validationBaseName)) {    // 现在没有验证需求
                     // 正常执行后续的Action调用
                 } else {    // 如果此时存在有验证需求，当验证通过之后再进行后续的处理
-                    String rule = ValidationRuleUtil.getValidateRule(this.validationBaseName,mapping);
+                    System.out.println(this.validationBaseName);
+                    String rule = ValidationRuleUtil.getValidateRule(this.validationBaseName, mapping);
+                    System.out.println("rule = " + rule);
                     if (rule != null) {
-                        errors = ValidationRuleUtil.validate(rule) ;    // 接收错误信息
+                        errors = ValidationRuleUtil.validate(rule);    // 接收错误信息
                     }
                 }
+                System.out.println("哈哈哈啊哈哈" + errors);
+                System.out.println(mapping.getActionMethod());
 
                 if (errors == null || errors.size() == 0) {
                     // 将实例化好的Action类的对象传递给依赖管理的对象类“DependObject”
@@ -87,27 +93,28 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 } else {    // 现在有错误信息
                     if (this.errorPageBaseName == null || "".equals(this.errorPageBaseName)) {  // 没有特指错误页
-                        dispatcherPath = this.errorPage500 ; // 全局错误页
+                        dispatcherPath = this.errorPage500; // 全局错误页
                     } else {
-                        dispatcherPath = ValidationRuleUtil.getValidateRule(this.errorPageBaseName,mapping) ;
+                        dispatcherPath = ValidationRuleUtil.getValidateRule(this.errorPageBaseName, mapping);
                         if (dispatcherPath == null || "".equals(dispatcherPath)) {
-                            dispatcherPath = this.errorPage500 ; // 全局错误页
+                            dispatcherPath = this.errorPage500; // 全局错误页
                         }
                     }
-                    request.setAttribute("errors",errors); // 保存所有的错误提示信息
+                    request.setAttribute("errors", errors); // 保存所有的错误提示信息
                 }
                 ServletObject.clean();
             } catch (Exception e) {
                 e.printStackTrace();
-                dispatcherPath = this.errorPage500 ;
+                dispatcherPath = this.errorPage500;
             }
         }
         if (dispatcherPath != null) {   // 此时有了跳转路径
-            request.getRequestDispatcher(dispatcherPath).forward(request,response);
+            request.getRequestDispatcher(dispatcherPath).forward(request, response);
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doGet(request,response);
+        this.doGet(request, response);
     }
 }
