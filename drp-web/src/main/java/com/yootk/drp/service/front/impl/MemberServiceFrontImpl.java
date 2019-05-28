@@ -14,6 +14,8 @@ public class MemberServiceFrontImpl extends AbstractService implements IMemberSe
     @Autowired
     private IMemberDAO memberDAO;
 
+
+
     @Override
     public boolean login(Member vo) throws SQLException {
         Member member = memberDAO.findById(vo.getMid());
