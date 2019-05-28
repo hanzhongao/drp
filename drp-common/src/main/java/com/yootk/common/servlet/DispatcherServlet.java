@@ -66,16 +66,11 @@ public class DispatcherServlet extends HttpServlet {
                 if (this.validationBaseName == null || "".equals(this.validationBaseName)) {    // 现在没有验证需求
                     // 正常执行后续的Action调用
                 } else {    // 如果此时存在有验证需求，当验证通过之后再进行后续的处理
-                    System.out.println(this.validationBaseName);
                     String rule = ValidationRuleUtil.getValidateRule(this.validationBaseName, mapping);
-                    System.out.println("rule = " + rule);
                     if (rule != null) {
                         errors = ValidationRuleUtil.validate(rule);    // 接收错误信息
                     }
                 }
-                System.out.println("哈哈哈啊哈哈" + errors);
-                System.out.println(mapping.getActionMethod());
-
                 if (errors == null || errors.size() == 0) {
                     // 将实例化好的Action类的对象传递给依赖管理的对象类“DependObject”
                     new DependObject(actionObject).injectService();    // 控制层注入业务层实例
