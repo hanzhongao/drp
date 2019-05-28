@@ -7,7 +7,7 @@
     <script type="text/javascript" src="js/login.js"></script>
 </head>
 <%!
-    public static final String LOGIN_URL = "/member_login.action";
+    public static final String LOGIN_URL = "member_login.action";
 %>
 <body class="back">
 <div class="container contentback">
