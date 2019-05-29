@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author 枉然
+ * @author 再次BUG更改
  */
 public interface IGoodsDAO extends IBaseDAO<Long, Goods>  {
     /**

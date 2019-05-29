@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author 枉然更改人
+ * @author 再次BUG更改
  */
 @Repository
 public class GoodsDAOImpl extends AbstractDAO implements IGoodsDAO {
