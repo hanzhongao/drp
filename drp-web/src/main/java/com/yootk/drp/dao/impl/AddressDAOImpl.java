@@ -14,13 +14,14 @@ import java.util.Set;
 public class AddressDAOImpl extends AbstractDAO implements IAddressDAO {
     @Override
     public boolean doCreate(Address address) throws SQLException {
-        String sql = "INSERT INTO address(mid,phone,pid,cid,addr) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO address(mid,phone,pid,cid,addr,receiver) VALUES (?,?,?,?,?,?)";
         super.pstmt = super.conn.prepareStatement(sql);
         super.pstmt.setString(1,address.getMid());
         super.pstmt.setString(2,address.getPhone());
         super.pstmt.setLong(3,address.getPid());
         super.pstmt.setLong(4,address.getCid());
         super.pstmt.setString(5,address.getAddr());
+        super.pstmt.setString(6,address.getReceiver());
         return super.pstmt.executeUpdate() > 0;
     }
 
@@ -63,4 +64,6 @@ public class AddressDAOImpl extends AbstractDAO implements IAddressDAO {
     public Long getAllCount(String column, String keyWord) throws SQLException {
         return null;
     }
+
+
 }

@@ -24,6 +24,8 @@ public class AddressActionFront extends AbstractAction {
     @RequestMapping("/address_add")
     public ModuleAndView addAddress(Address address){
         ModuleAndView mav = new ModuleAndView(super.getForwardPage()) ;
+        String mid = super.getFrontUser();
+        address.setMid(mid);
         try {
             String msg = super.getMessge("vo.add.failure","地址") ;
 
