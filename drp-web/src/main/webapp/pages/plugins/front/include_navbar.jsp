@@ -9,7 +9,7 @@
     public static final String MEMBER_EDIT_URL = "pages/front/center/member/member_edit.jsp";
     public static final String MEMBER_ADDRESS_LIST_URL = "pages/front/center/address/address_list.jsp";
     public static final String ORDERS_LIST_URL = "pages/front/center/orders/orders_list.jsp";
-    public static final String SHOPCAR_LIST_URL = "pages/front/center/shopcar/shopcar_list.jsp";
+    public static final String SHOPCAR_LIST_URL = "pages/front/center/shopcar/shopcar_list.action";
 %>
 <div class="col-md-12">
     <nav class="navbar navbar-default navbar-inverse navbar-fixed-top">

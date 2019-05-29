@@ -1,5 +1,6 @@
 <%@ page import="com.yootk.drp.vo.Goods" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <html>
@@ -54,7 +55,7 @@
 									<td class="text-center"><span id="price-${goods.gid}">${goods.price}</span></td>
 									<td class="text-center">
 										<button class="btn btn-primary" id="sub-${goods.gid}">-</button>
-										<input type="text" id="amount-${goods.gid}" name="amount-${goods.gid}" class="shopcar-form-control" size="4" maxlength="4" value="20">
+										<input type="text" id="amount-${goods.gid}" name="amount-${goods.gid}" class="shopcar-form-control" size="4" maxlength="4" value="${shopcar[goods.gid]}">
 										<button class="btn btn-primary" id="add-${goods.gid}">+</button>
 									</td>
 									<td class="text-center"><button class="btn btn-primary" id="updateBtn-${goods.gid}">修改</button></td>

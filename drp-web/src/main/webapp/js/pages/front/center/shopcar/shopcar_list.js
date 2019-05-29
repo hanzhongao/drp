@@ -7,31 +7,32 @@ $(function() {
 	}catch (e) {
 	}
 
-	$(rmBtn).on("click",function () {
-		data = "";
-		gitArray = new Array();
-		foot =0;
-		$(":checkbox[id='gid']").each(function () {
-			if($(this).prop("checked")){
-				data +=$(this).val() +";";
-				gitArray[foot++] =$(this).val();
+	$(rmBtn).on("click",function(){
+		data = "" ; // 保存要删除的商品编号
+		gidArray = new Array() ; // 保存要删除 gid编号
+		foot = 0 ;
+		$(":checkbox[id='gid']").each(function(){
+			if ($(this).prop("checked")) {
+				data += $(this).val() + ";";
+				gidArray[foot ++] = $(this).val() ;
 			}
-		});
-		if(data ==""){
-			operateAlert(false,"","请先选择要删除的小商品！") ;
-		}else{
-			$.get("pages/front/center/shopcar/shopcar_delete.action",{"data":data},function (data) {
-				operateAlert(data.trim()=="true","购物车信息删除成功！","购物车信息删除失败！") ;
-				if(data.trim()=="true"){
-					for(x = 0;x < gitArray.length;x++){
-						$("#shopcar-" +gitArray).fadeOut(1000,function () {
-							$("#shopcar-" + gitArray).remove();
-						});
+		}) ;
+		console.log(data)
+		if (data == "") {   // 此时没有选中任何的内容
+			operateAlert(false,"","请先选择要删除的购物项！") ;
+		} else {
+			$.get("pages/front/center/shopcar/shopcar_delete.action",{"data":data},function(data){
+				operateAlert(data.trim() == "true","购物车信息删除成功！","购物车信息删除失败！") ;
+				if (data.trim() == "true") {    // 删除对应的表格行的信息
+					for (x = 0 ; x < gidArray.length ; x ++) {
+						$("#shopcar-" + gidArray).fadeOut(1000,function() {
+							$("#shopcar-" + gidArray).remove() ;
+						}) ;
 					}
 				}
-			},"text");
+			},"text") ;
 		}
-	});
+	}) ;
 
 	$(editBtn).on("click",function () {
 		//发送修改数据
@@ -79,17 +80,13 @@ $(function() {
 		});
 	})
 })
-function calcSumPrice() {
-	//获得所有商品价格数据
-	$("span[id^='price']").each(function () {
-		//获取id
-		gid = $(this).attr("id").split("-")[1];
-		// console.log($(this).text());
-		//价格变小数
-		price = parseFloat($(this).text());
-		//获取数量
-		amount = parseInt($("#amount-" +gid).val());
-		sum = price * amount;
-	});
-	$(allPrice).text(round(sum,2));
+function calcSumPrice() {	// 进行购买总价的计算
+	sum = 0.0 ; // 保存商品的计算总价
+	$("span[id^='price-']").each(function() {	// 获取全部的商品价格元素的内容
+		gid = $(this).attr("id").split("-")[1] ; // 获取id的属性内容
+		price = parseFloat($(this).text()) ; // 将字符串的内容变为小数
+		amount = parseInt($("#amount-" + gid).val()); // 获取数量
+		sum += price * amount ; // 商品总价计算
+	}) ;
+	$(allPrice).text("￥" + round(sum,2)) ;
 }
