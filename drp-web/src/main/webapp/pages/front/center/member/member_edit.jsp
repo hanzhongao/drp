@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="js/pages/front/center/member/member_edit.js"></script>
 </head>
 <%!
-	public static final String MEMBER_EDIT_URL = "" ;
+	public static final String MEMBER_EDIT_URL = "pages/front/center/member/member_message_edit.action" ;
 %>
 <body class="back">
 	<div class="container contentback">

@@ -18,10 +18,37 @@ public class MemberActionFront extends AbstractAction {
     @Autowired
     private IMemberServiceFront memberServiceFront;
 
+    @RequestMapping("/pages/front/center/member/member_message_edit")
+    public ModuleAndView editMessage(String name,String phone,String email){
+        ModuleAndView mav = new ModuleAndView(super.getForwardPage()) ;
+        String mid = super.getFrontUser();
+        String msg = super.getMessge("vo.add.failure","个人信息修改失败") ;
+        try {
+            if (this.memberServiceFront.editMessage(mid,name,phone,email)) {
+                msg = super.getMessge("vo.add.success", "个人信息修改成功");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            String path = super.getPage("edit_message.action") ;
+            mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, path);
+            mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, msg);
+        }
+        return mav ;
+    }
+    @RequestMapping("/pages/front/center/member/member_message_edit_pre")
+    public String editMessagePre(){
+        return super.getPage("edit_message.page");
+    }
+    /**
+     * 修用户改密码
+     * @return
+     */
     @RequestMapping("/pages/front/center/member/member_password_edit_pre")
     public String editPasswordPre(){
         return super.getPage("edit.page");
     }
+
     @RequestMapping("/pages/front/center/member/member_password_edit")
     public ModuleAndView editPassword(String oldpassword,String newpassword){
         ModuleAndView mav = new ModuleAndView(super.getForwardPage()) ;
@@ -40,7 +67,6 @@ public class MemberActionFront extends AbstractAction {
             mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, path);
             mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, msg);
         }
-
         return mav ;
     }
     /**
@@ -73,16 +99,7 @@ public class MemberActionFront extends AbstractAction {
         }
         return mav ;
     }
-    /**
-     * 登录前的页面跳转处理
-     *
-     * @return 返回到登录页
-     */
-    @RequestMapping("/member_login_pre")
-    public ModuleAndView loginPre() {
-        ModuleAndView mav = new ModuleAndView(super.getPage("login.page"));
-        return mav;
-    }
+
 
     /**
      * 用户登录注销，登录注销后所有的Cookie信息将被删除
@@ -118,7 +135,16 @@ public class MemberActionFront extends AbstractAction {
             super.print(rand.equalsIgnoreCase(code));
         }
     }
-
+    /**
+     * 登录前的页面跳转处理
+     *
+     * @return 返回到登录页
+     */
+    @RequestMapping("/member_login_pre")
+    public ModuleAndView loginPre() {
+        ModuleAndView mav = new ModuleAndView(super.getPage("login.page"));
+        return mav;
+    }
     /**
      * 用户登录处理
      *

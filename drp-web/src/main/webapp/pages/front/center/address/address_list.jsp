@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -6,7 +7,7 @@
 </head>
 <%!
 	public static final String ADDRESS_ADD_URL = "pages/front/center/address/address_add.jsp" ;
-	public static final String ADDRESS_EDIT_URL = "pages/front/center/address/address_edit.jsp" ;
+	public static final String ADDRESS_EDIT_URL = "pages/front/center/address/address_find.action" ;
 %>
 <body>
 	<div class="container">
@@ -41,33 +42,19 @@
 								</tr>
 							</thead>
 							<tbody>
+							${allAddress}
+							<c:forEach items="${allAddress}" var="address">
 								<tr>
 									<td class="text-center">
-										<input type="checkbox" id="aid" name="aid" value="zhangsan">
+										<input type="checkbox" id="id" name="id" value="zhangsan">
 									</td>
-									<td class="text-center">李先生</td>
-									<td class="text-center">13934720223</td>
-									<td class="text-center">北京市朝阳区来广营马泉营</td>
-									<td class="text-center"><a id="editBtn-1" href="<%=ADDRESS_EDIT_URL%>" class="btn btn-primary btn-xs">编辑</a></td>
+									<input type="hidden" id="mid" name="mid" value="${address.adid}"/>
+									<td class="text-center">${address.receiver}</td>
+									<td class="text-center">${address.phone}</td>
+									<td class="text-center">${address.addr}</td>
+									<td class="text-center"><a id="editBtn-1" href="<%=ADDRESS_EDIT_URL%>?adid=${address.adid}" class="btn btn-primary btn-xs">编辑</a></td>
 								</tr>
-								<tr>
-									<td class="text-center">
-										<input type="checkbox" id="aid" name="aid" value="zhangsan">
-									</td>
-									<td class="text-center">李先生</td>
-									<td class="text-center">13934720223</td>
-									<td class="text-center">北京市朝阳区来广营马泉营</td>
-									<td class="text-center"><a id="editBtn-2" href="<%=ADDRESS_EDIT_URL%>" class="btn btn-primary btn-xs">编辑</a></td>
-								</tr>
-								<tr>
-									<td class="text-center">
-										<input type="checkbox" id="aid" name="aid" value="zhangsan">
-									</td>
-									<td class="text-center">李先生</td>
-									<td class="text-center">13934720223</td>
-									<td class="text-center">北京市朝阳区来广营马泉营</td>
-									<td class="text-center"><a id="editBtn-3" href="<%=ADDRESS_EDIT_URL%>" class="btn btn-primary btn-xs">编辑</a></td>
-								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 						<div class="text-right">

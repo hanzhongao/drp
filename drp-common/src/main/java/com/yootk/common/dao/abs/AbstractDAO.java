@@ -60,6 +60,16 @@ public abstract class AbstractDAO {
         }
         return 0L ;
     }
+    public Long handleCount(String mid,String tableName) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM " + tableName +" WHERE mid=?";
+        this.pstmt = this.conn.prepareStatement(sql) ;
+        this.pstmt.setString(1,mid);
+        ResultSet rs = this.pstmt.executeQuery() ;
+        if (rs.next()) {
+            return rs.getLong(1) ;
+        }
+        return 0L ;
+    }
     public Long handleCount(String tableName,String column,String keyWord) throws SQLException {
         String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE " + column + " LIKE ?" ;
         this.pstmt = this.conn.prepareStatement(sql) ;
@@ -70,7 +80,17 @@ public abstract class AbstractDAO {
         }
         return 0L ;
     }
-
+    public Long handleCount(String mid,String tableName,String column,String keyWord) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE mid=? AND " + column + " LIKE ?" ;
+        this.pstmt = this.conn.prepareStatement(sql) ;
+        this.pstmt.setString(1,mid);
+        this.pstmt.setString(2,"%"+keyWord+"%");
+        ResultSet rs = this.pstmt.executeQuery() ;
+        if (rs.next()) {
+            return rs.getLong(1) ;
+        }
+        return 0L ;
+    }
     public boolean handleRemove(String tableName, String columnName, Set<Long> ids) throws SQLException {
         StringBuffer sql = new StringBuffer("DELETE FROM ").append(tableName).append(" WHERE ") ;
         sql.append(columnName).append(" IN (") ;
