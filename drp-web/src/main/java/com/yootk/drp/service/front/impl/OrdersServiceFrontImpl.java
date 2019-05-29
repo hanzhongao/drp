@@ -9,6 +9,7 @@ import com.yootk.drp.vo.Address;
 import com.yootk.drp.vo.Details;
 import com.yootk.drp.vo.Goods;
 import com.yootk.drp.vo.Orders;
+import com.yootk.drp.dao.IGoodsDAO;
 
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class OrdersServiceFrontImpl extends AbstractService implements IOrdersSe
     private IShopCarDao shopCarDao ;
 
     @Autowired
-    private IGoodsDao goodsDao ;
+    private IGoodsDAO goodsDao ;
 
     @Autowired
     private IAddressDAO addressDAO ;
@@ -37,7 +38,7 @@ public class OrdersServiceFrontImpl extends AbstractService implements IOrdersSe
     public Map<String, Object> preAdd(String mid, Set<Long> gids) throws Exception {
         Map<String,Object> result = new HashMap<>() ;
         Map<Long,Integer> shopcar = this.shopCarDao.findAllByMember(mid) ;  //列出该用户的购物车的全部信息
-        List<Goods> allGoods = this.goodsDao.findAllByGods(gids) ;  //列出所有商品信息
+        List<Goods> allGoods = this.goodsDao.findAllByGids(gids) ;  //列出所有商品信息
         List<Address> allAddresses = this.addressDAO.findAddressByMember(mid) ; //列出该用户所有地址信息*/
         result.put("shopcar",shopcar) ;
         result.put("allGoods",allGoods) ;
@@ -52,7 +53,7 @@ public class OrdersServiceFrontImpl extends AbstractService implements IOrdersSe
         double sum = 0.0 ; // 进行商品总价的保存
         int amount = 0 ;    //商品总数的保存
         // 2、获取订单对应的所有商品数据，利用商品数据可以计算总价
-        List<Goods> allGoods = this.goodsDao.findAllByGods(gids) ;
+        List<Goods> allGoods = this.goodsDao.findAllByGids(gids) ;
         Map<Long,Integer> shopcar = this.shopCarDao.findAllByMember(orders.getMid()) ; // 获取当前用户的购物车内容
         for (Goods goods : allGoods) {
             sum += goods.getPrice() * shopcar.get(goods.getGid()) ; // 商品单价 * 商品数量
