@@ -15,14 +15,18 @@ import java.util.Set;
 public class GoodsDaoImpl extends AbstractDAO implements IGoodsDao {
     @Override
     public List<Goods> findAllByGods(Set<Long> gids) throws SQLException {
-        StringBuffer sql = new StringBuffer("select gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder FROM goods Where delflag=0 and gid in(");
-        for (Long gid : gids) {
-            sql.append(gid).append(",") ;
+        if(!(gids.size()==0)){
+            StringBuffer sql = new StringBuffer("select gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder FROM goods Where delflag=0 and gid in (");
+            for (Long gid : gids) {
+                sql.append(gid).append(",") ;
+            }
+            sql.delete(sql.length() - 1,sql.length()).append(")") ;
+            List<Goods> all = new ArrayList<Goods>();
+            super.pstmt = super.conn.prepareStatement(sql.toString());
+            return super.handleResultToList(super.pstmt.executeQuery(),Goods.class);
+        }else{
+            return null;
         }
-        sql.delete(sql.length() - 1,sql.length()).append(")") ;
-        List<Goods> all = new ArrayList<Goods>();
-        super.pstmt = super.conn.prepareStatement(sql.toString());
-        return super.handleResultToList(super.pstmt.executeQuery(),Goods.class);
     }
 
     @Override
