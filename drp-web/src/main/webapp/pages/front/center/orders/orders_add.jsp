@@ -54,12 +54,12 @@
 							</div>
 
                             <%--部分数据隐藏显示--%>
-                            <div id="sumDiv" class="form-group" >
+                            <div id="sumDiv" class="form-group" hidden>
                                 <label class="col-md-3 control-label" for="note" >订单总价：</label>
                                 <div class="col-md-5"><span id="allPrice" class="text-danger" >78.9</span></div>
                                 <div class="col-md-4" id="sumMsg"></div>
                             </div>
-                            <div >
+                            <div hidden>
                                 <table>
                                     <tbody>
                                     <c:forEach items="${allGoods}" var="goods">
