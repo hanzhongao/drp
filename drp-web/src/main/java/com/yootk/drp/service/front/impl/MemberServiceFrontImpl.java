@@ -2,6 +2,7 @@ package com.yootk.drp.service.front.impl;
 
 import com.yootk.common.annotation.Autowired;
 import com.yootk.common.annotation.Service;
+import com.yootk.common.encrypt.EncryptUtil;
 import com.yootk.common.service.abs.AbstractService;
 import com.yootk.drp.dao.IMemberDAO;
 import com.yootk.drp.service.front.IMemberServiceFront;
@@ -35,12 +36,34 @@ public class MemberServiceFrontImpl extends AbstractService implements IMemberSe
     }
 
     @Override
-    public boolean editPassword(String mid, String oldPassword, String newPassword) throws Exception {
-        if (!(oldPassword == "" || oldPassword.length() == 0 || oldPassword == "" || oldPassword.length() == 0)) {
-            if (memberDAO.findByPassword(mid) == oldPassword) {
-                return memberDAO.doEditPassword(mid, newPassword);
+    public boolean editPassword(String mid, String newpassword) throws Exception {
+        if(!(mid==""||"".equalsIgnoreCase(mid)||newpassword=="" ||"".equalsIgnoreCase(newpassword))){
+            String newword = EncryptUtil.encode(newpassword);
+            return memberDAO.doEditPassword(mid,newword);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean findPassWord(String mid, String oldpassword) throws Exception {
+        if(!(mid==""||mid==null||oldpassword=="" ||oldpassword==null)){
+            String password = memberDAO.findByPassword(mid);
+            String oldword = EncryptUtil.encode(oldpassword);
+            return password.equals(oldword);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addMember(Member member) throws Exception {
+        if (!(member.getMid() == ""|| "".equalsIgnoreCase(member.getMid()))){
+            if (memberDAO.findById(member.getMid()) == null){
+                member.setPassword(EncryptUtil.encode(member.getPassword()));
+                return memberDAO.doCreate(member);
             }
         }
         return false;
     }
+
+
 }

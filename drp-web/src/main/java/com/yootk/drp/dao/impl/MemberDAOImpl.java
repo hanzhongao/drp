@@ -2,6 +2,7 @@ package com.yootk.drp.dao.impl;
 
 import com.yootk.common.annotation.Repository;
 import com.yootk.common.dao.abs.AbstractDAO;
+import com.yootk.common.dbc.DatabaseConnection;
 import com.yootk.drp.dao.IMemberDAO;
 import com.yootk.drp.vo.Member;
 
@@ -37,6 +38,7 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
 
     @Override
     public boolean doEditPassword(String mid, String password) throws SQLException {
+        super.conn = DatabaseConnection.getConnection();
         String sql = "UPDATE member SET password=? WHERE mid=?";
         super.pstmt = super.conn.prepareStatement(sql);
         super.pstmt.setString(1, password);
@@ -46,17 +48,12 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
 
     @Override
     public boolean doCreate(Member member) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public boolean doEdit(Member member) throws SQLException {
-        return false;
-    }
-
-    @Override
-    public boolean doRemove(Set<String> strings) throws SQLException {
-        return false;
+        String sql = "INSERT INTO member(mid,password,type) VALUES (?,?,?)";
+        super.pstmt = super.conn.prepareStatement(sql);
+        super.pstmt.setString(1,member.getMid());
+        super.pstmt.setString(2,member.getPassword());
+        super.pstmt.setInt(3,0);
+        return super.pstmt.executeUpdate()>0;
     }
 
     @Override
@@ -65,6 +62,15 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
         super.pstmt = super.conn.prepareStatement(sql);
         super.pstmt.setString(1, s);
         return super.handleResultToVO(super.pstmt.executeQuery(), Member.class);
+    }
+    @Override
+    public boolean doEdit(Member member) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean doRemove(Set<String> strings) throws SQLException {
+        return false;
     }
 
     @Override

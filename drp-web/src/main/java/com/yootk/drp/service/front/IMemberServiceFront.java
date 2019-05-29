@@ -23,13 +23,8 @@ public interface IMemberServiceFront {
      */
     public boolean editMessage(String mid,String  name,String phone,String email) throws Exception;
 
-    /**
-     *
-     * @param mid
-     * @param oldPassword
-     * @param newPassword
-     * @return
-     * @throws Exception
-     */
-    public boolean editPassword(String mid,String oldPassword,String newPassword) throws Exception;
+
+    public boolean editPassword(String mid,String newpassword) throws Exception;
+    public boolean findPassWord(String mid,String oldpassword) throws Exception;
+    public boolean addMember(Member member) throws Exception ;
 }

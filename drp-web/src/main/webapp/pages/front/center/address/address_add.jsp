@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="js/pages/front/center/address/address_add.js"></script>
 </head>
 <%!
-	public static final String ADDRESS_ADD_URL = "" ;
+	public static final String ADDRESS_ADD_URL = "pages/front/center/address/address_add.action" ;
 %>
 <body class="back">
 	<div class="container contentback">

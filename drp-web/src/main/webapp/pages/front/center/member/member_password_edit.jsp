@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="js/pages/front/center/member/member_password_edit.js"></script>
 </head>
 <%!
-	public static final String MEMBER_EDIT_PASSWORD_URL = "" ;
+	public static final String MEMBER_EDIT_PASSWORD_URL = "/pages/front/center/member/member_password_edit.action" ;
 %>
 <body class="back">
 	<div class="container contentback">

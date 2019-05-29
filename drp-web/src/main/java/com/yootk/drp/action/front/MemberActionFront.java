@@ -18,6 +18,61 @@ public class MemberActionFront extends AbstractAction {
     @Autowired
     private IMemberServiceFront memberServiceFront;
 
+    @RequestMapping("/pages/front/center/member/member_password_edit_pre")
+    public String editPasswordPre(){
+        return super.getPage("edit.page");
+    }
+    @RequestMapping("/pages/front/center/member/member_password_edit")
+    public ModuleAndView editPassword(String oldpassword,String newpassword){
+        ModuleAndView mav = new ModuleAndView(super.getForwardPage()) ;
+        String mid = super.getFrontUser();
+        String msg = super.getMessge("vo.add.failure","修改密码失败") ;
+        try {
+            if (this.memberServiceFront.findPassWord(mid,oldpassword)) {
+                if(this.memberServiceFront.editPassword(mid,newpassword)) {
+                    msg = super.getMessge("vo.add.success", "修改密码成功");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            String path = super.getPage("edit.action") ;
+            mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, path);
+            mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, msg);
+        }
+
+        return mav ;
+    }
+    /**
+     * 注册
+     * @return
+     */
+    @RequestMapping("/regist_pre")
+    public String registPre(){
+        return super.getPage("regist.page");
+    }
+    /**
+     * 注册
+     * @param member
+     * @return
+     */
+    @RequestMapping("/regist")
+    public ModuleAndView regist(Member member){
+        ModuleAndView mav = new ModuleAndView(super.getForwardPage()) ;
+        try {
+            String msg = super.getMessge("vo.add.failure","账号注册失败") ;
+
+            if (this.memberServiceFront.addMember(member)) {
+                msg = super.getMessge("vo.add.success","账号注册成功") ;
+            }
+            String path = super.getPage("regist.action") ;
+            mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, path);
+            mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mav ;
+    }
     /**
      * 登录前的页面跳转处理
      *
