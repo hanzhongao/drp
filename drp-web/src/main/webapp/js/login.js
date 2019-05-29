@@ -54,6 +54,7 @@ $(function(){
 					dataType : "html", // 接收数据格式
 					data : { // 要传递的数据
 						code : function() {
+							/*console.log($("#code").val());*/
 							return $("#code").val();
 						}
 					},

@@ -27,6 +27,7 @@ public class ServiceProxy implements InvocationHandler {
                 DatabaseConnection.getConnection().commit();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             if (this.isTransaction(method.getName())) { // 要操作的业务方法存在有事务支持
                 DatabaseConnection.getConnection().rollback();
             }

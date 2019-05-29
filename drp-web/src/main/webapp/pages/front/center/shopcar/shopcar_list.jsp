@@ -6,6 +6,7 @@
 </head>
 <%!
 	public static final String GOODS_SHOW_URL = "pages/front/goods/goods_show.jsp" ;
+	public static final String ORDERS_ADD_URL = "pages/front/center/orders/orders_add_pre.action" ;
 %>
 <body class="back">
 	<div class="container contentback">
@@ -27,6 +28,7 @@
 						<strong><span class="glyphicon glyphicon-list"></span>&nbsp;我的购物车</strong>
 					</div>
 					<div class="panel-body">
+						<form action="<%=ORDERS_ADD_URL%>" method="post">
 						<table class="table table-condensed">
 							<thead>
 								<tr>
@@ -78,8 +80,9 @@
 						<div>
 							<button class="btn btn-primary" id="editBtn"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改数量</button>
 							<button class="btn btn-danger" id="rmBtn"><span class="glyphicon glyphicon-remove"></span>&nbsp;移出购物车</button>
-							<a class="btn btn-success" href="pages/front/center/orders/orders_add.jsp" id="addBtn"><span class="glyphicon glyphicon-file"></span>&nbsp;下单</a>
+							<button class="btn btn-success" type="submit"  id="addBtn"><span class="glyphicon glyphicon-file"></span>&nbsp;下单</button>
 						</div>
+						</form>
 					</div>
 					<div class="panel-footer">
 						<jsp:include page="/pages/plugins/alert.jsp"/>
