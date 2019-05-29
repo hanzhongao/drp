@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+/**
+ * @author 枉然更改人
+ */
 @Repository
 public class GoodsDAOImpl extends AbstractDAO implements IGoodsDAO {
     @Override
