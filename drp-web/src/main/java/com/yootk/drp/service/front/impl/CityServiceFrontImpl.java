@@ -21,7 +21,9 @@ public class CityServiceFrontImpl extends AbstractService implements ICityServic
      * @author 韩中傲
      */
     public List<City> findAllById(Long pid) throws Exception {
-        List<City> all = this.cityDAO.findByPid(pid) ;
-        return all;
+        if(pid == null || "".equals(pid)){
+            return null;
+        }
+        return this.cityDAO.findByPid(pid) ;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public interface IGoodsService  {
+public interface IGoodsServiceFont {
     /**
      * 进行商品的查询
      * key=商品的一级分类 value=List查询到的数据

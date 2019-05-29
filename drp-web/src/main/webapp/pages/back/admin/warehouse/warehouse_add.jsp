@@ -1,8 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <head>
 	<jsp:include page="/pages/plugins/basepath.jsp"/>
 	<script type="text/javascript" src="js/pages/back/admin/warehouse/warehouse_add.js"></script>
 	<script type="text/javascript" src="js/split_page.js"></script>
+	<script type="text/javascript" src="js/city/city.js"></script>
 </head>
 <%!
 	public static final String WAREHOUSE_ADD_URL = "" ;
@@ -43,9 +45,9 @@
 								<div class="col-md-5">
 									<select id="pid" name="pid" class="form-control">
 										<option value="">====== 请选择所在省份 ======</option>
-										<option value="1">河北省</option>
-										<option value="2">山西部</option>
-										<option value="3">广东省</option>
+										<c:forEach items="${findpro}" var="pro">
+										<option value="${pro.pid}">${pro.title}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -92,9 +94,9 @@
 								<div class="col-md-5">
 									<select id="iid" name="iid" class="form-control">
 										<option value="">====== 请选择库存商品类型 ======</option>
-										<option value="1">服装</option>
-										<option value="2">家电</option>
-										<option value="3">电子</option>
+										<c:forEach items="${findAll}" var="find">
+											<option value="${find.wiid}">${find.title}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->

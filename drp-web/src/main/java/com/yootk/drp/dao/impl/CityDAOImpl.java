@@ -24,20 +24,10 @@ public class CityDAOImpl extends AbstractDAO implements ICityDAO {
      */
     @Override
     public List<City> findByPid(Long pid) throws SQLException {
-        List<City> all = new ArrayList<>();
-        City city = null ;
         String sql = "select cid,title from city where pid=?";
         super.pstmt = super.conn.prepareStatement(sql) ;
         super.pstmt.setLong(1,pid);
-        ResultSet rs = super.pstmt.executeQuery() ;
-        while (rs.next()) {
-            city = new City() ;
-            city.setCid(rs.getLong(1));
-            city.setPid(pid);
-            city.setTitle(rs.getString(2));
-            all.add(city) ;
-        }
-        return all;
+        return super.handleResultToList(super.pstmt.executeQuery(),City.class);
     }
 
     @Override

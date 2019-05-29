@@ -19,7 +19,7 @@ public interface IShopCarDao extends IBaseDAO<Long, Shopcar> {
     public boolean doRemoveByMember(String mid, Set<Long>gids) throws SQLException;
     /**
      * 进行购物车中内容的批量修改
-     * @param mid
+     * @param
      * @return
      * @throws SQLException
      */

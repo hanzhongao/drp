@@ -5,10 +5,9 @@ import com.yootk.common.annotation.Service;
 import com.yootk.common.service.abs.AbstractService;
 import com.yootk.drp.dao.IGoodsDao;
 import com.yootk.drp.dao.IShopCarDao;
-import com.yootk.drp.service.front.IShopCarService;
+import com.yootk.drp.service.front.IShopCarServiceFont;
 import com.yootk.drp.vo.Goods;
 import com.yootk.drp.vo.Shopcar;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -21,7 +20,7 @@ import java.util.Set;
  * 这是购物车业务实现
  */
 @Service
-public class ShopcatServiceFrontImpl extends AbstractService implements IShopCarService{
+public class ShopcatServiceFrontImpl extends AbstractService implements IShopCarServiceFont {
     @Autowired
     public IShopCarDao shopCarDao;
 

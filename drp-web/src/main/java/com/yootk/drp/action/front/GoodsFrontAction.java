@@ -5,20 +5,16 @@ import com.yootk.common.annotation.Autowired;
 import com.yootk.common.annotation.Controller;
 import com.yootk.common.annotation.RequestMapping;
 import com.yootk.common.servlet.web.ModuleAndView;
-import com.yootk.common.servlet.web.ServletObject;
-import com.yootk.drp.service.front.IGoodsService;
-import com.yootk.drp.vo.Goods;
+import com.yootk.drp.service.front.IGoodsServiceFont;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class GoodsFrontAction extends AbstractAction{
     @Autowired
-    private IGoodsService goodsService;
+    private IGoodsServiceFont goodsService;
 
-    @RequestMapping("goods_list")
+    @RequestMapping("/goods_list")
     public void findAll() throws SQLException {
         ModuleAndView moduleAndView = new ModuleAndView();
         moduleAndView.add("goods",this.goodsService.findAll());
