@@ -2,6 +2,7 @@ $(function() {
 	$("#selectAll").on("click",function(){
 		checkboxSelectAll('gid',this.checked) ;
 	}) ;
+
 	try {
 		calcSumPrice();
 	}catch (e) {
@@ -79,6 +80,7 @@ $(function() {
 			}
 		});
 	})
+
 })
 function calcSumPrice() {	// 进行购买总价的计算
 	sum = 0.0 ; // 保存商品的计算总价
@@ -90,3 +92,5 @@ function calcSumPrice() {	// 进行购买总价的计算
 	}) ;
 	$(allPrice).text("￥" + round(sum,2)) ;
 }
+
+

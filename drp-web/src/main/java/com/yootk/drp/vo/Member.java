@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Member implements Serializable {
     private String  mid      ;
-    private String  lid      ;
+    private Long  lid      ;
     private Long    did      ;
     private String  name     ;
     private Double  sal      ;
@@ -26,7 +26,7 @@ public class Member implements Serializable {
     public Member() {
     }
 
-    public Member(String mid, String lid, Long did, String name, Double sal, String phone, String password, String photo, String note, Date regdate, String inmid, Integer locked, Integer type, String email, Long cuid) {
+    public Member(String mid, Long lid, Long did, String name, Double sal, String phone, String password, String photo, String note, Date regdate, String inmid, Integer locked, Integer type, String email, Long cuid) {
         this.mid = mid;
         this.lid = lid;
         this.did = did;
@@ -52,11 +52,11 @@ public class Member implements Serializable {
         this.mid = mid;
     }
 
-    public String getLid() {
+    public Long getLid() {
         return lid;
     }
 
-    public void setLid(String lid) {
+    public void setLid(Long lid) {
         this.lid = lid;
     }
 

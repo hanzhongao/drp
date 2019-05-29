@@ -117,4 +117,14 @@ public abstract class AbstractDAO {
         }
         return null ;
     }
+
+    public Long getLastId() throws SQLException {
+        String sql = "SELECT LAST_INSERT_ID()" ;
+        this.pstmt = this.conn.prepareStatement(sql) ;
+        ResultSet rs = this.pstmt.executeQuery() ;
+        if (rs.next()) {
+            return rs.getLong(1) ;
+        }
+        return null ;
+    }
 }
