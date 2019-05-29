@@ -1,6 +1,5 @@
 package com.yootk.drp.dao;
 
-import com.yootk.common.annotation.Repository;
 import com.yootk.common.dao.IBaseDAO;
 import com.yootk.drp.vo.Shopcar;
 
@@ -20,7 +19,7 @@ public interface IShopCarDao extends IBaseDAO<Long, Shopcar> {
     public boolean doRemoveByMember(String mid, Set<Long>gids) throws SQLException;
     /**
      * 进行购物车中内容的批量修改
-     * @param
+     * @param mid
      * @return
      * @throws SQLException
      */

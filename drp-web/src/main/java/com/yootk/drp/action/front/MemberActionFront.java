@@ -37,10 +37,15 @@ public class MemberActionFront extends AbstractAction {
     @RequestMapping("/member_logout")
     public ModuleAndView logout() {
         ModuleAndView mav = new ModuleAndView(super.getForwardPage());
+        String mid = super.getFrontUser();
         CookieUtil.clean(ServletObject.getResponse(), "info");
         ServletObject.getRequest().getSession().invalidate();
         mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, super.getIndexPage());
-        mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, ResourceUtil.getMessage("logout.success", ACTION_TITLE));
+        if (mid != null) {
+            mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, ResourceUtil.getMessage("logout.success", ACTION_TITLE));
+        } else {
+            mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, ResourceUtil.getMessage("logout.already", ACTION_TITLE));
+        }
         return mav;
     }
 

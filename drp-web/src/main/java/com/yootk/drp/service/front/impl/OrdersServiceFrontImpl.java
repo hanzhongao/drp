@@ -16,10 +16,10 @@ import java.util.*;
 public class OrdersServiceFrontImpl extends AbstractService implements IOrdersServiceFront {
 
     @Autowired
-    private IShopcarDAO shopcarDAO ;
+    private IShopCarDao shopCarDao ;
 
     @Autowired
-    private IGoodsDAO goodsDAO ;
+    private IGoodsDao goodsDao ;
 
     @Autowired
     private IAddressDAO addressDAO ;
@@ -36,8 +36,8 @@ public class OrdersServiceFrontImpl extends AbstractService implements IOrdersSe
     @Override
     public Map<String, Object> preAdd(String mid, Set<Long> gids) throws Exception {
         Map<String,Object> result = new HashMap<>() ;
-        Map<Long,Integer> shopcar = this.shopcarDAO.findAllByMember(mid) ;  //列出该用户的购物车的全部信息
-        List<Goods> allGoods = this.goodsDAO.findAllByGids(gids) ;  //列出所有商品信息
+        Map<Long,Integer> shopcar = this.shopCarDao.findAllByMember(mid) ;  //列出该用户的购物车的全部信息
+        List<Goods> allGoods = this.goodsDao.findAllByGods(gids) ;  //列出所有商品信息
         List<Address> allAddresses = this.addressDAO.findAddressByMember(mid) ; //列出该用户所有地址信息*/
         result.put("shopcar",shopcar) ;
         result.put("allGoods",allGoods) ;
@@ -52,8 +52,8 @@ public class OrdersServiceFrontImpl extends AbstractService implements IOrdersSe
         double sum = 0.0 ; // 进行商品总价的保存
         int amount = 0 ;    //商品总数的保存
         // 2、获取订单对应的所有商品数据，利用商品数据可以计算总价
-        List<Goods> allGoods = this.goodsDAO.findAllByGids(gids) ;
-        Map<Long,Integer> shopcar = this.shopcarDAO.findAllByMember(orders.getMid()) ; // 获取当前用户的购物车内容
+        List<Goods> allGoods = this.goodsDao.findAllByGods(gids) ;
+        Map<Long,Integer> shopcar = this.shopCarDao.findAllByMember(orders.getMid()) ; // 获取当前用户的购物车内容
         for (Goods goods : allGoods) {
             sum += goods.getPrice() * shopcar.get(goods.getGid()) ; // 商品单价 * 商品数量
             amount += shopcar.get(goods.getGid());
@@ -75,7 +75,7 @@ public class OrdersServiceFrontImpl extends AbstractService implements IOrdersSe
             // 5、将所有的订单详情的内容进行存储
             if (this.detailsDAO.doCreateBatch(allDetails)) {    // 订单详情保存成功
                 // 6、删除购物车中的相应数据
-                return this.shopcarDAO.doRemoveByMember(orders.getMid(),gids) ;
+                return this.shopCarDao.doRemoveByMember(orders.getMid(),gids) ;
             }
         }
         return false;

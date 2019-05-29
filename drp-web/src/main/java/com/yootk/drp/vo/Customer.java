@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Customer implements Serializable {
     private Long auto_increment;
+    private String mid ;
     private String name;
     private String phone;
     private Long pid;
@@ -19,7 +20,8 @@ public class Customer implements Serializable {
     private Integer status;
     private Integer type;
 
-    public Customer(){}
+    public Customer() {
+    }
 
     public Long getAuto_increment() {
         return auto_increment;
@@ -27,6 +29,14 @@ public class Customer implements Serializable {
 
     public void setAuto_increment(Long auto_increment) {
         this.auto_increment = auto_increment;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
     }
 
     public String getName() {
@@ -137,6 +147,7 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer{" +
                 "auto_increment=" + auto_increment +
+                ", mid='" + mid + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", pid=" + pid +

@@ -26,8 +26,7 @@ public class DispatcherServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         String scanPackages = config.getInitParameter("scanPackages"); // 定义扫描包
         ScannerPackageUtil.scannerHandle(this.getClass(), scanPackages);
-        this.errorPage404 = config.getInitParameter("404");
-        this.errorPage500 = config.getInitParameter("500");
+        this.errorPage404 = "pages/plugins/error.jsp";
         this.validationBaseName = config.getInitParameter("validationBaseName");
         this.messageBaseName = config.getInitParameter("messageBaseName");
         this.errorPageBaseName = config.getInitParameter("errorPageBaseName");

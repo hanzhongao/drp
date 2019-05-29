@@ -1,24 +1,43 @@
-
 package com.yootk.drp.dao.impl;
 
 import com.yootk.common.annotation.Repository;
+import com.yootk.common.dao.IBaseDAO;
 import com.yootk.common.dao.abs.AbstractDAO;
 import com.yootk.drp.dao.ICityDAO;
 import com.yootk.drp.vo.City;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Repository
 public class CityDAOImpl extends AbstractDAO implements ICityDAO {
 
+    /**
+     * 查询指定省下的所有城市
+     * @param pid  省份编号
+     * @return 省下的所有城市名称
+     * @throws SQLException
+     * @author 韩中傲
+     */
     @Override
-    public List<City> findCityByProvince(Long pid) throws SQLException {
-        String sql = "SELECT cid,title,pid FROM city WHERE pid=?";
+    public List<City> findByPid(Long pid) throws SQLException {
+        List<City> all = new ArrayList<>();
+        City city = null ;
+        String sql = "select cid,title from city where pid=?";
         super.pstmt = super.conn.prepareStatement(sql) ;
-        super.pstmt.setLong(1,pid) ;
-        return super.handleResultToList(super.pstmt.executeQuery(),City.class);
+        super.pstmt.setLong(1,pid);
+        ResultSet rs = super.pstmt.executeQuery() ;
+        while (rs.next()) {
+            city = new City() ;
+            city.setCid(rs.getLong(1));
+            city.setPid(pid);
+            city.setTitle(rs.getString(2));
+            all.add(city) ;
+        }
+        return all;
     }
 
     @Override
