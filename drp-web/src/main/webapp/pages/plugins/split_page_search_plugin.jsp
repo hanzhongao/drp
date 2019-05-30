@@ -33,25 +33,25 @@
 <div id="searchDiv">
 	<form ation="<%=url%>" class="form-horizontal" id="searchform" method="get">
 		<div class="form-group" id="searchDiv">
-<%
-	if (!(columnData == null || "".equals(columnData))) {
-%>
+			<%
+				if (!(columnData == null || "".equals(columnData))) {
+			%>
 			<div class="col-md-2">
 				<select id="col" name="col" class="form-control">
-<%
-					String columnResult [] = columnData.split("\\|") ;
-					for (int x = 0 ; x < columnResult.length ; x ++) {
-						String temp [] = columnResult[x].split(":") ;
-%>
-						<option value="<%=temp[1]%>" <%=column.equals(temp[1])?"selected":""%>><%=temp[0]%></option>
-<%
-					}
-%>
+					<%
+						String columnResult [] = columnData.split("\\|") ;
+						for (int x = 0 ; x < columnResult.length ; x ++) {
+							String temp [] = columnResult[x].split(":") ;
+					%>
+					<option value="<%=temp[1]%>" <%=column.equals(temp[1])?"selected":""%>><%=temp[0]%></option>
+					<%
+						}
+					%>
 				</select>
 			</div>
-<%
-	}
-%>
+			<%
+				}
+			%>
 			<div class="col-md-9">
 				<input type="hidden" name="<%=label%>" value="<%=labelValue%>">
 				<input type="text" id="kw" name="kw" class="form-control" placeholder="请输入模糊查询关键字" value="<%=keyword%>">

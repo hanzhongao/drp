@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="js/city/city.js"></script>
 </head>
 <%!
-	public static final String WAREHOUSE_ADD_URL = "" ;
+	public static final String WAREHOUSE_ADD_URL = "pages/back/admin/warehouse/warehouse_add.action" ;
 %>
 
 <body class="hold-transition skin-blue sidebar-mini"> 
@@ -59,9 +59,9 @@
 								<div class="col-md-5">
 									<select id="cid" name="cid" class="form-control">
 										<option value="">====== 请选择所在省份 ======</option>
-										<option value="1">石家庄</option>
-										<option value="2">沧州</option>
-										<option value="3">邯郸</option>
+										<option value="1"></option>
+										<option value="2"></option>
+										<option value="3"></option>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -73,7 +73,7 @@
 								<div class="col-md-5">
 									<!-- 定义表单输入组件 -->
 									<input type="text" id="address" name="address" class="form-control"
-										placeholder="请输入仓库地址信息">
+										placeholder="请输入仓库地址信息" value="">
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="addressMsg"></div>
@@ -88,11 +88,11 @@
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="areaMsg"></div>
 							</div>
-							<div class="form-group" id="iidDiv">
+							<div class="form-group" id="wiidDiv">
 								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="iid">仓库用途：</label>
+								<label class="col-md-3 control-label" for="wiid">仓库用途：</label>
 								<div class="col-md-5">
-									<select id="iid" name="iid" class="form-control">
+									<select id="wiid" name="wiid" class="form-control">
 										<option value="">====== 请选择库存商品类型 ======</option>
 										<c:forEach items="${findAll}" var="find">
 											<option value="${find.wiid}">${find.title}</option>
@@ -100,7 +100,7 @@
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
-								<div class="col-md-4" id="iidMsg"></div>
+								<div class="col-md-4" id="wiidMsg"></div>
 							</div>
 							<div class="form-group" id="maximumDiv">
 								<!-- 定义表单提示文字 -->

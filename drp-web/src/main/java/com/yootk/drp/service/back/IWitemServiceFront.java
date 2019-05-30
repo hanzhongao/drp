@@ -12,4 +12,11 @@ public interface IWitemServiceFront {
      * @return
      */
     public List<Witem> findAll() throws SQLException;
+
+    /**
+     * 根据商品仓库的类型id去查询对应的商品仓库类型
+     * @param wwid
+     * @return     商品仓库的类型
+     */
+    public Witem findByTile(Long wwid) throws SQLException;
 }

@@ -18,4 +18,12 @@ public class WitemServiceImpl extends AbstractService implements IWitemServiceFr
     public List<Witem> findAll() throws SQLException {
         return this.witemDao.findAll();
     }
+
+    @Override
+    public Witem findByTile(Long wwid) throws SQLException {
+        if(wwid == null ||"".equals(wwid)){
+            return null;
+        }
+        return this.witemDao.findById(wwid);
+    }
 }
