@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Customer implements Serializable {
-    private Long auto_increment;
+    private Long cuid;
     private String mid ;
     private String name;
     private String phone;
@@ -23,12 +23,30 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Long getAuto_increment() {
-        return auto_increment;
+    public Customer(Long cuid, String mid, String name, String phone, Long pid, Long cid, String address, Date indate, Integer connum, Long ciid, Long csid, String note, String recorder, Integer status, Integer type) {
+        this.cuid = cuid;
+        this.mid = mid;
+        this.name = name;
+        this.phone = phone;
+        this.pid = pid;
+        this.cid = cid;
+        this.address = address;
+        this.indate = indate;
+        this.connum = connum;
+        this.ciid = ciid;
+        this.csid = csid;
+        this.note = note;
+        this.recorder = recorder;
+        this.status = status;
+        this.type = type;
     }
 
-    public void setAuto_increment(Long auto_increment) {
-        this.auto_increment = auto_increment;
+    public Long getCuid() {
+        return cuid;
+    }
+
+    public void setCuid(Long cuid) {
+        this.cuid = cuid;
     }
 
     public String getMid() {
@@ -146,7 +164,7 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "Customer{" +
-                "auto_increment=" + auto_increment +
+                "cuid=" + cuid +
                 ", mid='" + mid + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
