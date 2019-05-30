@@ -57,6 +57,9 @@ public class OrdersActionFront extends AbstractAction {
      */
     @RequestMapping("orders_add_pre")
     public ModuleAndView addPre(Long[] gid) {
+        if(gid ==null ||gid.length==0){
+            return null;
+        }
         Set<Long> gidSet = new HashSet<>() ;
         gidSet.addAll(Arrays.asList(gid)) ; // 将数组通过List添加到Set之中
         if(gidSet == null || gidSet.size() == 0){

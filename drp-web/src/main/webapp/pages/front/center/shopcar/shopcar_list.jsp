@@ -49,7 +49,7 @@
 							<c:forEach items="${allGoods}" var="goods">
 								<tr id="shopcar-${goods.gid}">
 									<td class="text-center">
-										<input type="checkbox" id="gid" name="gid" value="${goods.gid}" >
+										<input type="checkbox" id="gid-${goods.gid}" name="gid" value="${goods.gid}" checked="checked">
 									</td>
 									<td class="text-center">
 										<a href="<%=GOODS_SHOW_URL%>" onmouseover="this.style.cursor='hand'">${goods.name}</a>
