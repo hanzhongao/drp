@@ -19,6 +19,7 @@ public class CityAction extends AbstractAction {
 
     @RequestMapping("/city_list")
     public void list(Long pid) throws Exception {
+        //查询所有的城市信息
         super.print(JSON.toJSONString(this.serviceFront.findAllById(pid)));
     }
     @Override

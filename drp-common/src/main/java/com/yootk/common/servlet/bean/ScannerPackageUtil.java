@@ -65,7 +65,6 @@ public class ScannerPackageUtil {
     }
 
     public static Map<String, ControllerRequestMapping> getActionMap() {
-        System.out.println(ACTION_MAP);
         return ACTION_MAP;
     }
 

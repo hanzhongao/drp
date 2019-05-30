@@ -10,7 +10,7 @@ import com.yootk.drp.service.front.IGoodsServiceFont;
 import java.sql.SQLException;
 
 @Controller
-public class GoodsFrontAction extends AbstractAction{
+public class GoodsActionFront extends AbstractAction{
     @Autowired
     private IGoodsServiceFont goodsService;
 
