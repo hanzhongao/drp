@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface IShopCarService  {
+public interface IShopCarServiceFont {
     /**
      * 对购物车数据进行删除
      * @param mid   用户编号

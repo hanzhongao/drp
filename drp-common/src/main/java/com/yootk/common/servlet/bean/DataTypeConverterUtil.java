@@ -31,55 +31,59 @@ public class DataTypeConverterUtil {    // 实现数据类型的转换处理
         }
     }
     public static Object convertArray(String paramName,Class<?> type) {   // 转换为数组
-        if (paramName == null || "".equals(paramName)) {
-            return null ;
-        } else {
-            if ("int[]".equals(type.getSimpleName())) {
-                String value [] = ServletObject.getParameterUtil().getParameterValues(paramName) ;
-                int array [] = new int[value.length] ; // 依据传入的数组创建新的整型数组
-                for (int x = 0 ; x < array.length ; x ++) {
-                    if (value[x].matches("\\d+")) { // 是否为数字
-                        array[x] = Integer.parseInt(value[x]) ; // 进行转换处理
+        try {
+            if (paramName == null || "".equals(paramName)) {
+                return null;
+            } else {
+                if ("int[]".equals(type.getSimpleName())) {
+                    String value[] = ServletObject.getParameterUtil().getParameterValues(paramName);
+                    int array[] = new int[value.length]; // 依据传入的数组创建新的整型数组
+                    for (int x = 0; x < array.length; x++) {
+                        if (value[x].matches("\\d+")) { // 是否为数字
+                            array[x] = Integer.parseInt(value[x]); // 进行转换处理
+                        }
                     }
-                }
-                return array ;
-            } else if ("Integer[]".equals(type.getSimpleName())) {
-                String value [] = ServletObject.getParameterUtil().getParameterValues(paramName) ;
-                Integer array [] = new Integer[value.length] ; // 依据传入的数组创建新的整型数组
-                for (int x = 0 ; x < array.length ; x ++) {
-                    if (value[x].matches("\\d+")) { // 是否为数字
-                        array[x] = Integer.parseInt(value[x]) ; // 进行转换处理
+                    return array;
+                } else if ("Integer[]".equals(type.getSimpleName())) {
+                    String value[] = ServletObject.getParameterUtil().getParameterValues(paramName);
+                    Integer array[] = new Integer[value.length]; // 依据传入的数组创建新的整型数组
+                    for (int x = 0; x < array.length; x++) {
+                        if (value[x].matches("\\d+")) { // 是否为数字
+                            array[x] = Integer.parseInt(value[x]); // 进行转换处理
+                        }
                     }
-                }
-                return array ;
-            } else if ("long[]".equals(type.getSimpleName())) {
-                String value [] = ServletObject.getParameterUtil().getParameterValues(paramName) ;
-                long array [] = new long[value.length] ; // 依据传入的数组创建新的整型数组
-                for (int x = 0 ; x < array.length ; x ++) {
-                    if (value[x].matches("\\d+")) { // 是否为数字
-                        array[x] = Long.parseLong(value[x]) ; // 进行转换处理
+                    return array;
+                } else if ("long[]".equals(type.getSimpleName())) {
+                    String value[] = ServletObject.getParameterUtil().getParameterValues(paramName);
+                    long array[] = new long[value.length]; // 依据传入的数组创建新的整型数组
+                    for (int x = 0; x < array.length; x++) {
+                        if (value[x].matches("\\d+")) { // 是否为数字
+                            array[x] = Long.parseLong(value[x]); // 进行转换处理
+                        }
                     }
-                }
-                return array ;
-            } else if ("Long[]".equals(type.getSimpleName())) {
-                String value [] = ServletObject.getParameterUtil().getParameterValues(paramName) ;
-                Long array [] = new Long[value.length] ; // 依据传入的数组创建新的整型数组
-                for (int x = 0 ; x < array.length ; x ++) {
-                    if (value[x].matches("\\d+")) { // 是否为数字
-                        array[x] = Long.parseLong(value[x]) ; // 进行转换处理
+                    return array;
+                } else if ("Long[]".equals(type.getSimpleName())) {
+                    String value[] = ServletObject.getParameterUtil().getParameterValues(paramName);
+                    Long array[] = new Long[value.length]; // 依据传入的数组创建新的整型数组
+                    for (int x = 0; x < array.length; x++) {
+                        if (value[x].matches("\\d+")) { // 是否为数字
+                            array[x] = Long.parseLong(value[x]); // 进行转换处理
+                        }
                     }
+                    return array;
+                } else if ("String[]".equals(type.getSimpleName())) {
+                    String value[] = ServletObject.getParameterUtil().getParameterValues(paramName);
+                    return value;
+                } else if ("MultipartFile[]".equals(type.getSimpleName())) {
+                    MultipartFile arr[] = new MultipartFile[ServletObject.getParameterUtil().getListUpload(paramName).size()];
+                    for (int x = 0; x < arr.length; x++) {
+                        arr[x] = ServletObject.getParameterUtil().getListUpload(paramName).get(x);
+                    }
+                    return arr;
                 }
-                return array ;
-            } else if ("String[]".equals(type.getSimpleName())){
-                String value [] = ServletObject.getParameterUtil().getParameterValues(paramName) ;
-                return value ;
-            } else if ("MultipartFile[]".equals(type.getSimpleName())){
-                MultipartFile arr[] = new MultipartFile[ServletObject.getParameterUtil().getListUpload(paramName).size()] ;
-                for (int x = 0 ; x < arr.length ; x ++) {
-                    arr[x] = ServletObject.getParameterUtil().getListUpload(paramName).get(x) ;
-                }
-                return arr ;
             }
+        }catch (Exception e){
+
         }
         return null ;
     }

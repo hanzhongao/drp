@@ -2,6 +2,7 @@ package com.yootk.drp.service.front.impl;
 
 import com.yootk.common.annotation.Autowired;
 import com.yootk.common.annotation.Repository;
+import com.yootk.common.annotation.Service;
 import com.yootk.common.service.abs.AbstractService;
 import com.yootk.drp.dao.IProvinceDAO;
 import com.yootk.drp.service.front.IProvinceServiceFront;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Service
 public class ProvinceServiceFrontImpl extends AbstractService implements IProvinceServiceFront {
 
     @Autowired
@@ -24,12 +25,11 @@ public class ProvinceServiceFrontImpl extends AbstractService implements IProvin
      */
     @Override
     public List<Province> findAll() {
-        List<Province> all = new ArrayList<>();
         try {
-            all = this.provinceDAO.findAll() ;
-        } catch (SQLException e) {
+            return this.provinceDAO.findAll() ;
+        }catch (Exception e){
             e.printStackTrace();
+            return null;
         }
-        return all;
     }
 }

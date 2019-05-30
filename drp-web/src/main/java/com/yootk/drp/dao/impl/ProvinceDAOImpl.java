@@ -2,6 +2,7 @@ package com.yootk.drp.dao.impl;
 
 import com.yootk.common.annotation.Repository;
 import com.yootk.common.dao.abs.AbstractDAO;
+import com.yootk.common.dbc.DatabaseConnection;
 import com.yootk.drp.dao.IProvinceDAO;
 import com.yootk.drp.vo.Province;
 
@@ -41,18 +42,10 @@ public class ProvinceDAOImpl extends AbstractDAO implements IProvinceDAO {
      */
     @Override
     public List<Province> findAll() throws SQLException {
-        List<Province> all = new ArrayList<>() ;
-        Province pro = null ;
         String sql = "select pid,title from province" ;
+        super.conn = DatabaseConnection.getConnection();
         super.pstmt = super.conn.prepareStatement(sql) ;
-        ResultSet rs = super.pstmt.executeQuery();
-        while(rs.next()){
-            pro = new Province() ;
-            pro.setPid(rs.getLong(1));
-            pro.setTitle(rs.getString(2));
-           all.add(pro) ;
-        }
-        return all;
+        return super.handleResultToList(super.pstmt.executeQuery(),Province.class);
     }
 
     @Override

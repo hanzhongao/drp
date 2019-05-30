@@ -5,7 +5,7 @@ import com.yootk.common.annotation.Autowired;
 import com.yootk.common.annotation.Controller;
 import com.yootk.common.annotation.RequestMapping;
 import com.yootk.common.servlet.web.ModuleAndView;
-import com.yootk.drp.service.front.IShopCarService;
+import com.yootk.drp.service.front.IShopCarServiceFont;
 import com.yootk.drp.vo.Shopcar;
 
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ import java.util.*;
 @RequestMapping("/pages/front/center/shopcar/")
 public class ShopcarActionFront extends AbstractAction {
     @Autowired
-    private IShopCarService shopCarService;
+    private IShopCarServiceFont shopCarService;
 
 
     @RequestMapping("shopcar_delete")
