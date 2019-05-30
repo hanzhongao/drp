@@ -22,6 +22,7 @@ import java.util.Date;
  */
 public class BuyApply implements Serializable {
     private  Long    bid      ;
+    private  String  mid      ;
     private  String  content  ;
     private  String  name     ;
     private  String  phone    ;
@@ -35,8 +36,9 @@ public class BuyApply implements Serializable {
     public BuyApply() {
     }
 
-    public BuyApply(Long bid, String content, String name, String phone, Long pid, Long cid, String address, String note, Integer status, Date subdate) {
+    public BuyApply(Long bid, String mid, String content, String name, String phone, Long pid, Long cid, String address, String note, Integer status, Date subdate) {
         this.bid = bid;
+        this.mid = mid;
         this.content = content;
         this.name = name;
         this.phone = phone;
@@ -54,6 +56,14 @@ public class BuyApply implements Serializable {
 
     public void setBid(Long bid) {
         this.bid = bid;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
     }
 
     public String getContent() {
@@ -132,6 +142,7 @@ public class BuyApply implements Serializable {
     public String toString() {
         return "BuyApply{" +
                 "bid=" + bid +
+                ", mid='" + mid + '\'' +
                 ", content='" + content + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +

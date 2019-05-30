@@ -2,9 +2,11 @@ package com.yootk.drp.dao.impl;
 
 import com.yootk.common.annotation.Repository;
 import com.yootk.common.dao.abs.AbstractDAO;
+import com.yootk.common.dbc.DatabaseConnection;
 import com.yootk.drp.dao.IMemberDAO;
 import com.yootk.drp.vo.Member;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -43,15 +45,45 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
         super.pstmt.setString(2, mid);
         return super.pstmt.executeUpdate() > 0;
     }
-
+    /**
+     * 实现数据信息的增加操作，该方法主要执行的是INSERT更新语句
+     * @param member 保存要增加数据的信息类
+     * @return 数据保存成功返回true，否则返回false
+     * @throws SQLException 数据库执行异常
+     * @author hanzhongao
+     */
     @Override
     public boolean doCreate(Member member) throws SQLException {
-        return false;
+        String sql = "insert into member (mid,password,name,phone,did,lid,photo,note,sal,regdate) " +
+                " values (?,?,?,?,?,?,?,?,?,?)" ;
+        super.pstmt = super.conn.prepareStatement(sql);
+        super.pstmt.setString(1,member.getMid());
+        super.pstmt.setString(2,member.getPassword()) ;
+        super.pstmt.setString(3,member.getName()) ;
+        super.pstmt.setString(4,member.getPhone()) ;
+        super.pstmt.setLong(5,member.getDid()) ;
+        super.pstmt.setLong(6,member.getLid()) ;
+        super.pstmt.setString(7,member.getPhoto()) ;
+        super.pstmt.setString(8,member.getNote()) ;
+        super.pstmt.setDouble(9,member.getSal());
+        super.pstmt.setDate(10,new Date(member.getRegdate().getTime()));
+        return super.pstmt.executeUpdate() > 0 ;
     }
 
     @Override
     public boolean doEdit(Member member) throws SQLException {
-        return false;
+        String sql = "update member set password=?,name=?,phone=?,did=?,lid=?,photo=?,note=?,sal=? where mid =?";
+        super.pstmt = super.conn.prepareStatement(sql);
+        super.pstmt.setString(1,member.getPassword()) ;
+        super.pstmt.setString(2,member.getName()) ;
+        super.pstmt.setString(3,member.getPhone()) ;
+        super.pstmt.setLong(4,member.getDid()) ;
+        super.pstmt.setLong(5,member.getLid()) ;
+        super.pstmt.setString(6,member.getPhoto()) ;
+        super.pstmt.setString(7,member.getNote()) ;
+        super.pstmt.setDouble(8,member.getSal());
+        super.pstmt.setString(9,member.getMid());
+        return super.pstmt.executeUpdate() > 0 ;
     }
 
     @Override
@@ -74,21 +106,26 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
 
     @Override
     public List<Member> findSplit(Long currentPage, Integer lineSize) throws SQLException {
-        return null;
+        String sql = "select photo,name,lid,did,regdate,sal,phone from member limit " + (currentPage - 1) * lineSize + ", " + lineSize ;
+        super.pstmt = super.conn.prepareStatement(sql);
+        return super.handleResultToList(super.pstmt.executeQuery(),Member.class);
     }
 
     @Override
     public List<Member> findSplit(Long currentPage, Integer lineSize, String column, String keyWord) throws SQLException {
-        return null;
+        String sql = "select photo,name,lid,did,regdate,sal,phone from member where " + column + " like ? limit " + + (currentPage - 1) * lineSize + ", " + lineSize ;
+        super.pstmt = super.conn.prepareStatement(sql) ;
+        super.pstmt.setString(1,"%" + keyWord + "%");
+        return super.handleResultToList(super.pstmt.executeQuery(),Member.class);
     }
 
     @Override
     public Long getAllCount() throws SQLException {
-        return null;
+        return super.handleCount("member");
     }
 
     @Override
     public Long getAllCount(String column, String keyWord) throws SQLException {
-        return null;
+        return super.handleCount("member",column,keyWord);
     }
 }
