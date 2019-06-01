@@ -85,7 +85,7 @@ public class MemberActionBack extends AbstractAction {
     @RequestMapping("emp_list")
     public ModuleAndView list(){
         ModuleAndView mav = new ModuleAndView(super.getPage("list.page")); // 跳转路径
-        PageUtil pu = new PageUtil(super.getPage("list.action")); // 分页组件
+        PageUtil pu = new PageUtil(super.getPage("list.action"),"联系电话:phone|雇员编号:mid"); // 分页组件
         try {
             mav.add(this.memberServiceBack.list(pu.getCurrentPage(), pu.getLineSize(),pu.getColumn(), pu.getKeyword()));
         } catch (Exception e) {
