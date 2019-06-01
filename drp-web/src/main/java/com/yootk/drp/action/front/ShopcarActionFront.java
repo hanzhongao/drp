@@ -17,7 +17,6 @@ public class ShopcarActionFront extends AbstractAction {
     @Autowired
     private IShopCarServiceFont shopCarService;
 
-
     @RequestMapping("shopcar_delete")
     public void delete(String data){
         Set<Long> gids = new HashSet<>();
@@ -67,17 +66,6 @@ public class ShopcarActionFront extends AbstractAction {
         }
     }
 
-    @RequestMapping("shopcar_list")
-    public ModuleAndView list(){
-        ModuleAndView mav = new ModuleAndView(super.getPage("list.page"));
-        try {
-            Map<String,Object> map = this.shopCarService.listByMember(super.getFrontUser());
-            mav.add(map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mav;
-    }
 
     @Override
     public String getUploadDir() {

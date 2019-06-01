@@ -3,6 +3,7 @@ package com.yootk.drp.service.front;
 import com.yootk.drp.vo.Member;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public interface IMemberServiceFront {
     /**
@@ -32,4 +33,5 @@ public interface IMemberServiceFront {
      * @throws Exception
      */
     public boolean editPassword(String mid,String oldPassword,String newPassword) throws Exception;
+
 }

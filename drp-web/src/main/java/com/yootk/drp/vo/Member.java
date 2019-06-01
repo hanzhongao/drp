@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Member implements Serializable {
     private String  mid      ;
-    private Long  lid      ;
+    private Long    lid      ;
     private Long    did      ;
     private String  name     ;
     private Double  sal      ;
@@ -168,7 +168,7 @@ public class Member implements Serializable {
     public String toString() {
         return "Member{" +
                 "mid='" + mid + '\'' +
-                ", lid='" + lid + '\'' +
+                ", lid=" + lid +
                 ", did=" + did +
                 ", name='" + name + '\'' +
                 ", sal=" + sal +

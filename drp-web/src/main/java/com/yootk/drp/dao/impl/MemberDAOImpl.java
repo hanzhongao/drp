@@ -45,6 +45,57 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
         super.pstmt.setString(2, mid);
         return super.pstmt.executeUpdate() > 0;
     }
+
+    @Override
+    public List<Member> findAllByType() throws SQLException {
+        String sql = "SELECT mid,lid,did,name,sal,phone,password,photo,note,regdate,inmid,locked,type,email,cuid FROM member WHERE type=?";
+        super.pstmt = super.conn.prepareStatement(sql);
+        super.pstmt.setInt(1, 1);
+        return super.handleResultToList(super.pstmt.executeQuery(), Member.class);
+    }
+
+    @Override
+    public Long getCountByType() throws SQLException {
+        String sql = "select count(*) from member where type=1" ;
+        super.pstmt = super.conn.prepareStatement(sql);
+        ResultSet rs = super.pstmt.executeQuery() ;
+        if (rs.next()) {
+            return rs.getLong(1) ;
+        }
+        return 0L  ;
+    }
+
+    /**
+     * 修改用户类型
+     * @param mid 用户mid
+     * @param type 用户类型 0：前端用户 1：后台雇员
+     * @return 修改成功返回true,修改失败返回false
+     * @throws SQLException
+     * @author hanzhongao
+     */
+    @Override
+    public boolean doEditType(String mid,Integer type) throws SQLException {
+        String sql = "UPDATE member SET type=? WHERE mid=? ";
+        super.pstmt = super.conn.prepareStatement(sql);
+        super.pstmt.setInt(1,type);
+        super.pstmt.setString(2,mid);
+        return super.pstmt.executeUpdate() > 0;
+    }
+
+    @Override
+    public Long getCountByType(String column, String keyWord) throws SQLException {
+        String sql = "select count(*) from member where type=1 and " + column + " like ? " ;
+        super.pstmt = super.conn.prepareStatement(sql);
+        super.pstmt.setString(1, "%" + keyWord + "%");
+        ResultSet rs = super.pstmt.executeQuery() ;
+        if (rs.next()) {
+            return rs.getLong(1) ;
+        }
+        return 0L  ;
+    }
+
+
+
     /**
      * 实现数据信息的增加操作，该方法主要执行的是INSERT更新语句
      * @param member 保存要增加数据的信息类
@@ -72,6 +123,7 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
 
     @Override
     public boolean doEdit(Member member) throws SQLException {
+        super.conn = DatabaseConnection.getConnection();
         String sql = "update member set password=?,name=?,phone=?,did=?,lid=?,photo=?,note=?,sal=? where mid =?";
         super.pstmt = super.conn.prepareStatement(sql);
         super.pstmt.setString(1,member.getPassword()) ;
@@ -106,14 +158,14 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
 
     @Override
     public List<Member> findSplit(Long currentPage, Integer lineSize) throws SQLException {
-        String sql = "select photo,name,lid,did,regdate,sal,phone from member limit " + (currentPage - 1) * lineSize + ", " + lineSize ;
+        String sql = "select mid,photo,name,lid,did,regdate,sal,phone from member where type=1 limit " + (currentPage - 1) * lineSize + ", " + lineSize ;
         super.pstmt = super.conn.prepareStatement(sql);
         return super.handleResultToList(super.pstmt.executeQuery(),Member.class);
     }
 
     @Override
     public List<Member> findSplit(Long currentPage, Integer lineSize, String column, String keyWord) throws SQLException {
-        String sql = "select photo,name,lid,did,regdate,sal,phone from member where " + column + " like ? limit " + + (currentPage - 1) * lineSize + ", " + lineSize ;
+        String sql = "select photo,name,lid,did,regdate,sal,phone from member where type=1 and " + column + "  like ? limit " + + (currentPage - 1) * lineSize + ", " + lineSize ;
         super.pstmt = super.conn.prepareStatement(sql) ;
         super.pstmt.setString(1,"%" + keyWord + "%");
         return super.handleResultToList(super.pstmt.executeQuery(),Member.class);
@@ -128,4 +180,6 @@ public class MemberDAOImpl extends AbstractDAO implements IMemberDAO {
     public Long getAllCount(String column, String keyWord) throws SQLException {
         return super.handleCount("member",column,keyWord);
     }
+
+
 }

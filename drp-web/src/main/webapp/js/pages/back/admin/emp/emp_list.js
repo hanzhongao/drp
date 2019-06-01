@@ -1,7 +1,14 @@
 $(function(){
-	$(selall).on("click",function(){
-		$("input[id^=eid-]").each(function(){
-			$(this).prop("checked",true) ;
-		}) ;
-	}) ;
-})
+	//实现全选与反选
+	$("#selall").click(function() {
+		if (this.checked){
+			$("input[name^=eid-]:checkbox").each(function(){
+				$(this).attr("checked", true);
+			});
+		} else {
+			$("input[name^=eid-]:checkbox").each(function() {
+				$(this).attr("checked", false);
+			});
+		}
+	});
+});
