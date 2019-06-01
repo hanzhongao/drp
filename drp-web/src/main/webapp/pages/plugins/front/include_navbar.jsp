@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%!
     public static final String LOGIN_URL = "login.jsp";
     public static final String MALL_INDEX_URL = "mall_index.jsp";
@@ -69,7 +70,10 @@
                 <ul class="dropdown-menu main-list">
                     <li><a href="pages/front/center/member/member_password_edit.jsp"><i
                             class="glyphicon glyphicon-edit"></i>&nbsp;修改密码</a></li>
-                    <li><a href="pages/back/index.jsp"><i class="glyphicon glyphicon-home"></i>&nbsp;管理中心</a></li>
+
+
+
+                        <li><a href="pages/back/index.jsp"><i class="glyphicon glyphicon-home"></i>&nbsp;管理中心</a></li>
                     <li class="divider"></li>
                     <li><a href="member_logout.action"><i class="glyphicon glyphicon-off"></i>&nbsp;登录注销</a></li>
                 </ul>

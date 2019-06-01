@@ -1,12 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%!
-	public static final String GOODS_ADD_URL = "" ;
+	public static final String GOODS_ADD_URL = "/pages/back/admin/goods/goods_add.action" ;
 %>
 <html>
 <head>
 	<jsp:include page="/pages/plugins/basepath.jsp"/>
 	<script type="text/javascript" src="js/pages/back/admin/goods/goods_add.js"></script>
 	<script type="text/javascript" src="bootstrap/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="js/subtype/subtype.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -39,13 +41,13 @@
 							</div>
 							<div class="form-group" id="tidDiv">
 								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="tid">商品分类：</label>
+								<label class="col-md-3 control-label" for="wiid">商品分类：</label>
 								<div class="col-md-5">
-									<select id="tid" name="tid" class="form-control">
+									<select id="wiid" name="wiid" class="form-control">
 										<option value="">====== 请选择商品所属分类 ======</option>
-										<option value="1">手机数码</option>
-										<option value="2">女鞋、箱包</option>
-										<option value="3">电脑、办公</option>
+										<c:forEach items="${allWitem}" var="witem">
+											<option value="${witem.wiid}">${witem.title}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -57,9 +59,9 @@
 								<div class="col-md-5">
 									<select id="stid" name="stid" class="form-control">
 										<option value="">====== 请选择商品所属子分类 ======</option>
-										<option value="1">手机</option>
-										<option value="2">老人机</option>
-										<option value="3">平板电脑</option>
+										<c:forEach items="${allSubtype}" var="subtype">
+											<option value="${subtype.stid}">${subtype.title}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -75,6 +77,13 @@
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="priceMsg"></div>
 							</div>
+							<div class="form-group" id="stoDiv">
+							<label class="col-md-3 control-label" for="stornum">存货量（*）：</label>
+							<div class="col-md-5">
+								<input type="text" id="stornum" name="stornum" class="form-control"
+									   placeholder="请输入商品存货量">
+							</div>
+							</div>
 							<div class="form-group" id="weightDiv">
 								<!-- 定义表单提示文字 -->
 								<label class="col-md-3 control-label" for="weight">商品重量（g）：</label>
@@ -88,10 +97,10 @@
 							</div>
 							<div class="form-group" id="picDiv">
 								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="pic">商品图片：</label>
+								<label class="col-md-3 control-label" for="photo">商品图片：</label>
 								<div class="col-md-5">
 									<!-- 定义表单输入组件 -->
-									<input type="file" id="pic" name="pic" class="form-control"
+									<input type="file" id="photo" name="photo" class="form-control"
 										placeholder="请上传商品照片">
 								</div>
 								<!-- 定义表单错误提示显示元素 -->

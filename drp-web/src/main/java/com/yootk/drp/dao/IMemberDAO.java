@@ -7,6 +7,13 @@ import java.sql.SQLException;
 
 public interface IMemberDAO extends IBaseDAO<String, Member> {
     /**
+     * 登录的时候根据mid查询type
+     * @param mid
+     * @return
+     * @throws SQLException
+     */
+    public Integer getTypeByMid(String mid) throws SQLException;
+    /**
      * 在个人中心进行  编辑个人信息 (用户名称，电话，邮箱)
      *
      * @param mid   当前用户的编号
@@ -37,4 +44,5 @@ public interface IMemberDAO extends IBaseDAO<String, Member> {
      */
     public boolean doEditPassword(String mid, String password) throws SQLException;
 
+    public Member findMessageInfo(String mid) throws SQLException;
 }

@@ -1,8 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<jsp:include page="/pages/plugins/basepath.jsp"/>
 	<script type="text/javascript" src="js/pages/front/center/address/address_add.js"></script>
+	<script type="text/javascript" src="js/city/city.js"></script>
 </head>
 <%!
 	public static final String ADDRESS_ADD_URL = "pages/front/center/address/address_add.action" ;
@@ -58,11 +60,9 @@
 									<div class="col-md-5">
 										<select id="pid" name="pid" class="form-control">
 											<option value="">========= 请选择所在省份 =========</option>
-											<option value="1">北京</option>
-											<option value="2">天津</option>
-											<option value="3">上海</option>
-											<option value="4">山东</option>
-											<option value="5">辽宁</option>
+											<c:forEach items="${allProvince}" var="province">
+											<option value="${province.pid}">${province.title}</option>
+											</c:forEach>
 										</select>
 									</div>
 									<!-- 定义表单错误提示显示元素 -->
@@ -74,9 +74,9 @@
 									<div class="col-md-5">
 										<select id="cid" name="cid" class="form-control">
 											<option value="">========= 请选择所在城市 =========</option>
-											<option value="11">济南</option>
-											<option value="12">青岛</option>
-											<option value="13">潍坊</option>
+											<c:forEach items="${allCity}" var="city">
+											<option value="${city.cid}">${cid.title}</option>
+											</c:forEach>
 										</select>
 									</div>
 									<!-- 定义表单错误提示显示元素 -->

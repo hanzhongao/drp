@@ -1,13 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%!
-	public static final String GOODS_EDIT_URL = "pages/back/admin/goods/goods_edit.jsp" ;
-	public static final String GOODS_SHOW_URL = "pages/back/admin/goods/goods_show.jsp" ;
+	public static final String GOODS_EDIT_URL = "pages/back/admin/goods/goods_edit_pre.action" ;
+	public static final String GOODS_SHOW_URL = "pages/back/admin/goods/goods_show.action" ;
 %>
 <html>
 <head>
 	<jsp:include page="/pages/plugins/basepath.jsp"/>
 	<script type="text/javascript" src="js/pages/back/admin/goods/goods_list.js"></script>
-	<script type="text/javascript" src="js/split_page.js"></script>
+	<script type="text/javascript" src="/js/split_page.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -41,21 +42,24 @@
 						</tr>
 					</thead>
 					<tbody>
+
+					<c:forEach items="${allGoods}" var="good">
 						<tr>
-							<td class="text-left">100001</td>
-							<td class="text-left"><a href="<%=GOODS_SHOW_URL%>" title="查看商品详情">胡友牌化粪池</a></td>
-							<td class="text-center">4456</td>
-							<td class="text-center">200g</td>
+							<td class="text-left">${good.gid}</td>
+							<td class="text-left"><a href="<%=GOODS_SHOW_URL%>?gid=${good.gid}" title="查看商品详情">${good.name}</a></td>
+							<td class="text-center">${good.price}</td>
+							<td class="text-center">${good.weight}</td>
 							<td class="text-center">2018-10-13</td>
-							<td class="text-center"><span id="storage-1" style="cursor:pointer;">3000</span></td>
-							<td class="text-center"><span id="mid-admin" style="cursor:pointer;">老李</span></td> 
+							<td class="text-center"><span id="storage-${goods.gid}" style="cursor:pointer;">${good.stornum}</span></td>
+							<td class="text-center"><span id="mid-${good.recorder}" style="cursor:pointer;">${good.recorder}</span></td>
 							<td class="text-left">
-								<a href="<%=GOODS_EDIT_URL%>" class="btn btn-primary btn-xs">
+								<a href="<%=GOODS_EDIT_URL%>?gid=${good.gid}" class="btn btn-primary btn-xs">
 										<span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</a>
 								<button class="btn btn-danger btn-xs" id="out-1">
 										<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;待出库</button>
 							</td>
 						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 				<div id="splitBarDiv" style="float:right">

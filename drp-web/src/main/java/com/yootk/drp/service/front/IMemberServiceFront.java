@@ -3,6 +3,7 @@ package com.yootk.drp.service.front;
 import com.yootk.drp.vo.Member;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public interface IMemberServiceFront {
     /**
@@ -27,4 +28,6 @@ public interface IMemberServiceFront {
     public boolean editPassword(String mid,String newpassword) throws Exception;
     public boolean findPassWord(String mid,String oldpassword) throws Exception;
     public boolean addMember(Member member) throws Exception ;
+    public Integer findTypeByMid(String mid) throws Exception;
+    public Map<String,Object> findMemberInfo(String mid) throws SQLException;
 }

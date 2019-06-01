@@ -12,6 +12,14 @@ public class Level implements Serializable {
     public Level() {
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Long getLid() {
         return lid;
     }

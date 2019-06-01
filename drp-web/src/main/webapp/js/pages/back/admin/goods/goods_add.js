@@ -28,7 +28,7 @@ $(function(){
 			"name" : {
 				required : true
 			} ,
-			"tid" : {
+			"wiid" : {
 				required : true 
 			},
 			"stid" : {
@@ -42,7 +42,7 @@ $(function(){
 				required : true ,
 				digits : true 
 			},
-			"pic" : {
+			"photo" : {
 				required : true ,
 				accept : ["jpg","png","gif","bmp"]
 			},

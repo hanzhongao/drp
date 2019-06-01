@@ -14,8 +14,8 @@
 	public static final String STORAGE_AUDIT_LIST_URL = "pages/back/admin/storageaudit/storageaudit_list_prepare.jsp" ;
 	public static final String STORAGE_AUDIT_HISTORY_URL = "pages/back/admin/storageaudit/storageaudit_list_history.jsp" ;
 
-	public static final String GOODS_ADD_URL = "pages/back/admin/goods/goods_add.jsp" ;
-	public static final String GOODS_LIST_URL = "pages/back/admin/goods/goods_list.jsp" ;
+	public static final String GOODS_ADD_URL = "pages/back/admin/goods/goods_add_pre.action" ;
+	public static final String GOODS_LIST_URL = "pages/back/admin/goods/goods_list.action" ;
 
 	public static final String DISTRIBUTION_GOODS_LIST_URL = "pages/back/admin/distribution/distribution_goods_list.jsp" ;
 	public static final String DISTRIBUTION_LIST_URL = "pages/back/admin/distribution/distribution_list_myself.jsp" ;
@@ -30,7 +30,8 @@
     public static final String EMP_LIST_URL = "pages/back/admin/emp/emp_list.jsp" ;
 
 	public static final String NEWS_ADD_URL = "pages/back/admin/news/news_add.jsp" ;
-	public static final String NEWS_LIST_URL = "pages/back/admin/news/news_list.jsp" ;
+	public static final String NEWS_LIST_FRONT_URL = "/pages/front/news/news_list_back.action" ;
+	public static final String NEWS_LIST_BACK_URL = "/pages/back/admin/news/news_list.action" ;
 %>
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
@@ -142,9 +143,9 @@
 				<ul class="treeview-menu">
 					<li class="${param.action=='news:add' ? 'active' : ''}"><a href="<%=NEWS_ADD_URL%>"><i
 							class="fa fa-plus-circle"></i> 发布公告</a></li>
-					<li class="${param.action=='news:list' ? 'active' : ''}"><a href="<%=NEWS_LIST_URL%>"><i
+					<li class="${param.action=='news:list' ? 'active' : ''}"><a href="<%=NEWS_LIST_BACK_URL%>"><i
 							class="fa fa-list-ul"></i> 公告列表</a></li>
-					<li class="${param.action=='news:list' ? 'active' : ''}"><a href="<%=NEWS_LIST_URL%>"><i
+					<li class="${param.action=='news:list' ? 'active' : ''}"><a href="<%=NEWS_LIST_FRONT_URL%>"><i
 							class="fa fa-list-ul"></i> 公告显示</a></li>
 				</ul></li>
 		</ul>

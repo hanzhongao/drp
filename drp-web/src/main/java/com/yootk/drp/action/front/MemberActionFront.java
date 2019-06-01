@@ -1,5 +1,6 @@
 package com.yootk.drp.action.front;
 
+import com.alibaba.fastjson.JSON;
 import com.yootk.common.action.abs.AbstractAction;
 import com.yootk.common.annotation.Autowired;
 import com.yootk.common.annotation.Controller;
@@ -12,11 +13,25 @@ import com.yootk.common.util.ResourceUtil;
 import com.yootk.drp.service.front.IMemberServiceFront;
 import com.yootk.drp.vo.Member;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class MemberActionFront extends AbstractAction {
     public static final String ACTION_TITLE = "用户";
+
     @Autowired
     private IMemberServiceFront memberServiceFront;
+
+    @RequestMapping("/pages/plugins/back/modal/member_info")
+    public void member_info_modal(String mid){
+        try {
+            super.print(JSON.toJSONString( this.memberServiceFront.findMemberInfo(mid)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @RequestMapping("/pages/front/center/member/member_message_edit")
     public ModuleAndView editMessage(String name,String phone,String email){
@@ -158,6 +173,8 @@ public class MemberActionFront extends AbstractAction {
         vo.setPassword(EncryptUtil.encode(vo.getPassword()));
         if (memberServiceFront.login(vo)) {
             ServletObject.getRequest().getSession().setAttribute("mid", vo.getMid());
+            Integer type = memberServiceFront.findTypeByMid(vo.getMid());
+            ServletObject.getRequest().getSession().setAttribute("type", type);
             mav.setView(super.getForwardPage());
             mav.add(AbstractAction.PATH_ATTRIBUTE_NAME, super.getIndexPage());
             mav.add(AbstractAction.MSG_ATTRIBUTE_NAME, ResourceUtil.getMessage("login.success", ACTION_TITLE));

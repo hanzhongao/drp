@@ -9,6 +9,7 @@ public class News implements Serializable {
     private String photo;
     private String note;
     private Integer status;
+    private String issuer;  //新增字段  发布人
 
     @Override
     public String toString() {
@@ -56,6 +57,14 @@ public class News implements Serializable {
 
     public String getNote() {
         return note;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
     }
 
     public void setNote(String note) {

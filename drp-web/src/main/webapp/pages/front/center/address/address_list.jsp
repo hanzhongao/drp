@@ -6,8 +6,8 @@
 	<script type="text/javascript" src="js/pages/front/center/address/address_list.js"></script>
 </head>
 <%!
-	public static final String ADDRESS_ADD_URL = "pages/front/center/address/address_add.jsp" ;
-	public static final String ADDRESS_EDIT_URL = "pages/front/center/address/address_find.action" ;
+	public static final String ADDRESS_ADD_URL = "pages/front/center/address/address_add_pre.action" ;
+	public static final String ADDRESS_EDIT_URL = "pages/front/center/address/address_edit_pre.action" ;
 %>
 <body>
 	<div class="container">
@@ -23,7 +23,7 @@
 					<jsp:param value="5" name="ch"/>
 				</jsp:include>
 			</div>
-			<div class="col-md-10 col-xs-10">
+			<div class="col-md-10 col-xs-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<strong><span class="glyphicon glyphicon-list"></span>&nbsp;个人地址信息列表</strong>
@@ -42,13 +42,12 @@
 								</tr>
 							</thead>
 							<tbody>
-							${allAddress}
+
 							<c:forEach items="${allAddress}" var="address">
-								<tr>
+								<tr id="address-${address.adid}">
 									<td class="text-center">
-										<input type="checkbox" id="id" name="id" value="zhangsan">
+										<input type="checkbox" id="aid" name="aid" value="${address.adid}">
 									</td>
-									<input type="hidden" id="mid" name="mid" value="${address.adid}"/>
 									<td class="text-center">${address.receiver}</td>
 									<td class="text-center">${address.phone}</td>
 									<td class="text-center">${address.addr}</td>
@@ -57,14 +56,18 @@
 							</c:forEach>
 							</tbody>
 						</table>
-						<div class="text-right">
-							<button class="btn btn-danger" id="delBtn">删除地址</button>
-							<a href="<%=ADDRESS_ADD_URL%>" class="btn btn-primary">增加新地址</a>
+						<div id="splitBarDiv" style="float:right">
+							<jsp:include page="/pages/plugins/split_page_bar_plugin.jsp"/>
 						</div>
+					</div>
+					<div class="text-right">
+						<button class="btn btn-danger" id="delBtn">删除地址</button>
+						<a href="<%=ADDRESS_ADD_URL%>" class="btn btn-primary">增加新地址</a>
 					</div>
 					<div class="panel-footer">
 						<jsp:include page="/pages/plugins/alert.jsp"/>
 					</div>
+
 				</div>
 			</div>
 		</div>

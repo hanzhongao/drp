@@ -4,18 +4,26 @@ import com.yootk.common.annotation.Autowired;
 import com.yootk.common.annotation.Service;
 import com.yootk.common.encrypt.EncryptUtil;
 import com.yootk.common.service.abs.AbstractService;
+import com.yootk.drp.dao.IDeptDAO;
+import com.yootk.drp.dao.ILevelDAO;
 import com.yootk.drp.dao.IMemberDAO;
 import com.yootk.drp.service.front.IMemberServiceFront;
+import com.yootk.drp.vo.Dept;
+import com.yootk.drp.vo.Level;
 import com.yootk.drp.vo.Member;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class MemberServiceFrontImpl extends AbstractService implements IMemberServiceFront {
     @Autowired
     private IMemberDAO memberDAO;
-
-
+    @Autowired
+    private ILevelDAO levelDAO;
+    @Autowired
+    private IDeptDAO deptDAO;
 
     @Override
     public boolean login(Member vo) throws SQLException {
@@ -63,6 +71,26 @@ public class MemberServiceFrontImpl extends AbstractService implements IMemberSe
             }
         }
         return false;
+    }
+
+    @Override
+    public Integer findTypeByMid(String mid) throws Exception {
+        if (mid == "" || "".equals(mid)){
+            return null;
+        }
+        return memberDAO.getTypeByMid(mid);
+    }
+
+    @Override
+    public Map<String, Object> findMemberInfo(String mid) throws SQLException {
+        Map<String,Object> map = new HashMap<>();
+        Member member = memberDAO.findById(mid);
+        Dept dept = deptDAO.findById(member.getDid());
+        Level level = levelDAO.findById(member.getLid());
+        map.put("member",member);
+        map.put("dept",dept);
+        map.put("level",level);
+        return map;
     }
 
 

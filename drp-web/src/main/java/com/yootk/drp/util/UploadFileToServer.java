@@ -12,7 +12,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.File;
 
 public class UploadFileToServer {
-    public static final String UPLOAD_URL = "http://upload-server/upload.action" ;
+    public static final String UPLOAD_URL = "http://106.13.151.148/upload.action" ;
     public static String upload(File file,String contentType) throws Exception {
         // 1、创建一个可以被关闭的httpClient的对象
         CloseableHttpClient httpClient = HttpClients.createDefault() ; // 创建一个默认的HttpClient

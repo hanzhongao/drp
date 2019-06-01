@@ -40,7 +40,6 @@ $(function(){
 			},
 			"weight" : {
 				required : true ,
-				digits : true 
 			},
 			"pic" : {
 				required : true ,
